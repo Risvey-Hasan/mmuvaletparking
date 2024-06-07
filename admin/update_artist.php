@@ -27,7 +27,7 @@ require_once ("function/validate.php");
         <div class="container">
         <form id="registrationForm" method="post" action="helpers/update_artist.php" onsubmit="return validateRegiterform()">
         <div class="form-group">
-            <h2>Update Artist Information</h2>
+            <h2>Update Student Information</h2>
         </div>
            <div class="form-group">
                <?php

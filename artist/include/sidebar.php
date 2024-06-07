@@ -5,7 +5,7 @@
                 <img src="assets/img/logo.png" alt="">
             </div>
 
-            <span class="logo_name">Artist</span>
+            <span class="logo_name">Student</span>
         </div>
 
         <div class="menu-items">
