@@ -16,16 +16,16 @@
                 </a></li>
                 <li><a href="remove_artist.php">
                      <i class="uil uil-thumbs-up"></i>
-                    <span class="link-name">Remove Artist</span>
+                    <span class="link-name">Remove Student</span>
                 </a></li>
 
                 <li><a href="assist_artist.php">
                      <i class="uil uil-comments"></i>
-                    <span class="link-name">Assist Artist</span>
+                    <span class="link-name">FAQ</span>
                 </a></li>
                 <li><a href="artist_info.php">
                     <i class="uil uil-chart"></i>
-                    <span class="link-name">Update Artist Info</span>
+                    <span class="link-name">Update Student Info</span>
                 </a></li>
             </ul>
             <ul class="logout-mode">

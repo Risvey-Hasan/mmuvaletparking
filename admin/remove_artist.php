@@ -20,7 +20,7 @@ $result = $conn->query($sql);
     <div class="overview">
         <div class="title">
             <i class="uil uil-tachometer-fast-alt"></i>
-            <span class="text">Artists</span>
+            <span class="text">Student</span>
         </div>
         <?php
             if(isset($_SESSION["msg"])){
@@ -64,7 +64,7 @@ $result = $conn->query($sql);
                             $i++;
                         }
                     } else {
-                        echo "<tr><td colspan='6'>No artists found</td></tr>";
+                        echo "<tr><td colspan='6'>No Student found</td></tr>";
                     }
                     ?>
                 </tbody>

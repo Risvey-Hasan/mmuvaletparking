@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artist Registration</title>
+    <title>Student Registration</title>
     <link rel="stylesheet" href="assets/css/externalstyle.css" type="text/css"/>
 </head>
 <body>
     <div class="container">
-        <h2>Artist Registration</h2>
+        <h2>Student Registration</h2>
         <form id="registrationForm" method="post" action="helpers/register.php" onsubmit="return validateRegiterform()">
            <div class="form-group">
                <?php

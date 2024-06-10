@@ -46,6 +46,7 @@ require_once("include/connection.php");
                         if ($row["reply"] == "") {
                             echo "<td><button class='btn reply-btn' data-id='" . $row["id"] . "' data-subject='" . htmlspecialchars($row["subject"]) . "' data-message='" . htmlspecialchars($row["message"]) . "'>Reply</button></td>";
                         } else {
+                            
                             echo "<td></td>";
                         }
                         echo "</tr>";

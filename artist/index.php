@@ -9,7 +9,7 @@ require_once("include/connection.php");
     <div class="overview">
         <div class="title">
             <i class="uil uil-tachometer-fast-alt"></i>
-            <span class="text">Artist  Dashboard</span>
+            <span class="text">Student Dashboard</span>
         </div>
         <?php 
         $id = $_SESSION['User'];
