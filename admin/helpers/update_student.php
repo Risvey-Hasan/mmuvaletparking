@@ -14,9 +14,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check if any field is empty
     if(empty($name) || empty($email) || empty($phone) || empty($address) || empty($id)){
         $_SESSION["msg"] = '<div class="alert alert-danger">
-        <strong>Sorry, some fields in the artist information form are empty</strong>
+        <strong>Sorry, some fields in the student information form are empty</strong>
     </div>';
-      header("location:../artist_info.php"); 
+      header("location:../student_info.php");
       exit();
     }
 
@@ -28,11 +28,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $_SESSION["msg"] = '<div class="alert alert-success">
         <strong>Artist Information is  Successfully Updated</strong>
         </div>';
-        header("location:../artist_info.php");
+        header("location:../student_info.php");
     }else{
         $_SESSION["msg"] = '<div class="alert alert-info">
         <strong>Oops Something went wrong</strong>
         </div>';
-        header("location:../artist_info.php");
+        header("location:../student_info.php");
     }
 }

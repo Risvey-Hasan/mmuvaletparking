@@ -59,7 +59,7 @@ $result = $conn->query($sql);
                             echo "<td>" . htmlspecialchars($row["email"]) . "</td>";
                             echo "<td>" . htmlspecialchars($row["phone"]) . "</td>";
                             echo "<td>" . htmlspecialchars($row["address"]) . "</td>";
-                            echo "<td><a href='helpers/delete_artist.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure you want to delete this artist?\")'>Delete</a></td>";
+                            echo "<td><a href='helpers/delete_artist.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure you want to delete this student?\")'>Delete</a></td>";
                             echo "</tr>";
                             $i++;
                         }

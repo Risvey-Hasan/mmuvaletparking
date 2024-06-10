@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 
     if (empty($id)) {
         $_SESSION["msg"] = '<div class="alert alert-danger">
-            <strong>Invalid artist ID</strong>
+            <strong>Invalid student ID</strong>
         </div>';
         header("location:../remove_artist.php");
         exit();

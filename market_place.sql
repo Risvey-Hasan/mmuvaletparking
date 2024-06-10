@@ -129,7 +129,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `password`, `privilege`) VALUES
-(1, 'Ibrahim Mohammed', 'artist@gmail.com', '08108101246', 'No.  5 Badawa', '$2y$10$Ior1sDuJRgBi3nA5zjx0E.XAf4DUEHkkzz69/M1MH0eALH/F0zQXW', 1),
+(1, 'Ibrahim Mohammed', 'student@gmail.com', '08108101246', 'No.  5 Badawa', '$2y$10$Ior1sDuJRgBi3nA5zjx0E.XAf4DUEHkkzz69/M1MH0eALH/F0zQXW', 1),
 (2, 'Admin', 'admin@gmail.com', '0905678999', 'Layin Alhaji Hamisu', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 2),
 (3, 'Artist One', 'artist1@example.com', '1234567890', 'Address 1', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
 (4, 'Artist Two', 'artist2@example.com', '1234567891', 'Address 2', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),

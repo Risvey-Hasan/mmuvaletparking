@@ -13,7 +13,7 @@ require_once ("function/validate.php");
                 $id = validate_input($_GET['id']);
             } 
             else{
-                header("location: artist_info.php");
+                header("location: student_info.php");
                 exit();
             }           
             $sql = "SELECT * FROM users WHERE id = ?";
@@ -25,7 +25,7 @@ require_once ("function/validate.php");
                 while ($row = $result->fetch_assoc()){
         ?>
         <div class="container">
-        <form id="registrationForm" method="post" action="helpers/update_artist.php" onsubmit="return validateRegiterform()">
+        <form id="registrationForm" method="post" action="helpers/update_student.php" onsubmit="return validateRegiterform()">
         <div class="form-group">
             <h2>Update Student Information</h2>
         </div>
