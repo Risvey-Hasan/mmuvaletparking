@@ -13,6 +13,8 @@ require_once("include/connection.php");
             <span class="text">Messages</span>
         </div>
         <?php
+
+        
             if(isset($_SESSION["msg"])){
                 echo $_SESSION["msg"];
             }
