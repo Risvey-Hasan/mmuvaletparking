@@ -26,13 +26,20 @@
                      <i class="uil uil-comments"></i>
                     <span class="link-name">Get Support</span>
                 </a></li>
-                <li><a href="orders.php">
-                     <i class="uil uil-thumbs-up"></i>
-                    <span class="link-name">Orders</span>
+                <li><a href="announcement.php">
+                     <i class="uil uil-newspaper"></i>
+                    <span class="link-name">News & Announcement</span>
                 </a></li>
-                <li><a href="listings.php">
-                    <i class="uil uil-share"></i>
-                    <span class="link-name">Listings</span>
+                <li><a href="parkingslot.php">
+                     <i class="uil uil-parking-circle"></i>
+                    <span class="link-name">Parking Slot</span>
+                </a></li>
+            </ul>
+
+            <ul>
+            <li><a href="contact.php">
+                    <i class="uil uil-phone"></i>
+                    <span class="link-name">Contact Us</span>
                 </a></li>
             </ul>
             

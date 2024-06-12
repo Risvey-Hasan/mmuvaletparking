@@ -12,20 +12,24 @@
             <ul class="nav-links">
                 <li><a href="index.php">
                     <i class="uil uil-estate"></i>
-                    <span class="link-name">Dahsboard</span>
+                    <span class="link-name">Dashboard</span>
                 </a></li>
-                <li><a href="remove_artist.php">
+                <li><a href="remove_student.php">
                      <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Remove Student</span>
                 </a></li>
 
-                <li><a href="assist_artist.php">
+                <li><a href="assist_student.php">
                      <i class="uil uil-comments"></i>
                     <span class="link-name">FAQ</span>
                 </a></li>
-                <li><a href="artist_info.php">
+                <li><a href="student_info.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Update Student Info</span>
+                </a></li>
+                <li><a href="announcement.php">
+                    <i class="uil uil-newspaper"></i>
+                    <span class="link-name">Update News & Announcement</span>
                 </a></li>
             </ul>
             <ul class="logout-mode">
