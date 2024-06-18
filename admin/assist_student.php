@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Assist Artists"; 
+$pageTitle = "Assist Students";
 require_once("function/authentication.php");
 require_once("include/header.php"); 
 require_once("include/sidebar.php");
@@ -67,7 +67,7 @@ require_once("include/connection.php");
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Reply to Message</h2>
-        <form method="POST" action="helpers\asist_artist.php">
+        <form method="POST" action="helpers\assist_student.php">
             <input type="hidden" name="message_id" id="message_id">
             <div class="form-group">
                 <label for="subject">Subject</label>
