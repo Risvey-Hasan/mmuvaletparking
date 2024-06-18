@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Registration</title>
-    <link rel="stylesheet" href="assets/css/externalstyle.css" type="text/css"/>
+    <link rel="stylesheet" href="assets/css/register.css" type="text/css"/>
 </head>
 <body>
     <div class="container">
