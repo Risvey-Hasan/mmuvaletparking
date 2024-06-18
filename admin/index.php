@@ -25,7 +25,7 @@ require_once("include/connection.php");
         $total_messages = $row['total_messages'];
          
         // Query to get total count of products
-        $sql = "SELECT COUNT(*) AS total_products FROM products";
+        $sql = "SELECT COUNT(*) AS total_products FROM products";  
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $total_products = $row['total_products'];
