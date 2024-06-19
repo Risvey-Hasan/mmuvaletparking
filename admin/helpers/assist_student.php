@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["msg"] = '<div class="alert alert-danger">
             <strong>All fields are required.</strong>
         </div>';
-        header("location:../assist_student.php");
+        header("location:../faq-admin.php");
         exit();
     }
 
@@ -23,12 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["msg"] = '<div class="alert alert-success">
             <strong>Reply sent successfully.</strong>
         </div>';
-        header("location:../assist_student.php");
+        header("location:../faq-admin.php");
     } else {
         $_SESSION["msg"] = '<div class="alert alert-danger">
             <strong>Oops! Something went wrong.</strong>
         </div>';
-        header("location:../assist_student.php");
+        header("location:../faq-admin.php");
     }
 }
 

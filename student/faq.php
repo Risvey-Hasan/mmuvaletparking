@@ -26,7 +26,7 @@ require_once("include/connection.php");
             <tbody>
             <?php          
             $id = $_SESSION['User'];
-            $sql = "SELECT subject, message,reply, created_at FROM messages WHERE user_id = '$id'";
+            $sql = "SELECT subject, message,reply, created_at FROM faq WHERE user_id = '$id'";
             $result = $conn->query($sql);
             $i = 1;
             if ($result->num_rows > 0) {

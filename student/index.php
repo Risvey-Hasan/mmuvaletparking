@@ -21,7 +21,7 @@ require_once("include/connection.php");
         $total_orders = $row['total_orders'];
 
         // Query to get total count of support
-        $sql = "SELECT COUNT(*) AS total_messages FROM messages WHERE user_id='$id'";
+        $sql = "SELECT COUNT(*) AS total_messages FROM faq WHERE user_id='$id'";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $total_messages = $row['total_messages'];
