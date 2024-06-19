@@ -1,0 +1,123 @@
+.chat-container {
+    display: flex;
+    height: 85%;
+    width: 50%;
+    align-content: center;
+}
+
+.sidebar {
+    width: 40%;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.user-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px;
+}
+
+.user-list li {
+    margin-bottom: 10px;
+    background-color: #007BFF;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.user-list a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.chat-box-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.chat-box {
+    flex: 1;
+    margin: 10px 10px 10px 3px;
+    padding: 10px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+}
+
+.chat-message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.chat-message.admin {
+    background-color: #007BFF;
+    color: white;
+    align-self: flex-end;
+}
+
+.chat-message.user {
+    background-color: #E1E1E1;
+    align-self: flex-start;
+}
+
+.chat-message img {
+    max-width: 100%;
+    height: auto;
+}
+
+#chat-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#message-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 50%;
+}
+
+/* Hide the original file input */
+#file-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Style the file input button */
+.custom-file-upload {
+    padding: 5px;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #f8f6f0;
+    border-radius: 4px;
+    color: #1d536e;
+    font-size: 14px;
+    width: 2%;
+}
+
+.custom-file-upload:hover {
+    background-color: #e0e0e0;
+}
+
+#chat-form button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
