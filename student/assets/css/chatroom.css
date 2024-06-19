@@ -1,90 +1,108 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
 .chat-container {
     display: flex;
     flex-direction: column;
-    height: 80%;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 80%;
+    max-width: 1000px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    height: 80vh;
+}
+
+.chat-box-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .chat-box {
-    flex: 1;
-    padding: 10px;
+    padding: 20px;
+    flex-grow: 1;
     overflow-y: auto;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
 }
 
 .chat-message {
+    margin: 10px 0;
+    max-width: 70%;
+    border-radius: 10px;
     padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    max-width: 60%;
-    word-wrap: break-word;
 }
 
 .chat-message.admin {
-    background-color: #E1E1E1;
+    background-color: #a8b9ff;
+    color: black;
     align-self: flex-start;
 }
 
 .chat-message.user {
-    background-color: #007BFF;
-    color: white;
+    background-color: #ecf0f1;
+    color: #2c3e50;
     align-self: flex-end;
 }
 
-.chat-message img {
+.chat-image {
     max-width: 100%;
-    height: auto;
+    border-radius: 5px;
 }
 
-#chat-form {
+.chat-form {
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-
-#message-input {
-    flex: 1;
     padding: 10px;
-    border: 1px solid #ccc;
+    background-color: #ecf0f1;
+    border-top: 1px solid #bdc3c7;
+}
+
+.message-input {
+    flex: 4;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #bdc3c7;
     border-radius: 5px;
-    width: 50%;
 }
 
-/* Hide the original file input */
-#file-input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-/* Style the file input button */
 .custom-file-upload {
-    padding: 5px;
     display: inline-block;
     cursor: pointer;
-    background-color: #f8f6f0;
-    border-radius: 4px;
-    color: #1d536e;
-    font-size: 14px;
-    width: 2%;
+    margin-right: 10px;
 }
 
-.custom-file-upload:hover {
-    background-color: #e0e0e0;
+.file-icon {
+    width: 24px;
+    height: 24px;
+    fill: #2c3e50;
 }
 
+#file-input {
+    display: none;
+}
 
-#chat-form button {
+.send-button {
     padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
     border: none;
+    background-color: #1abc9c;
+    color: white;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.send-button:hover {
+    background-color: #16a085;
+}
+
+.timestamp {
+    font-size: 0.75em;
+    color: #888;
+    margin-bottom: 5px;
 }

@@ -41,3 +41,16 @@ document.getElementById('chat-form').addEventListener('submit', function(e) {
         })
         .catch(error => console.error('Error:', error));
 });
+
+
+document.getElementById('chat-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const messageInput = document.getElementById('message-input');
+    if (messageInput.value.trim() !== '') {
+        // Code to send the message
+        messageInput.value = '';
+    }
+});
+
+const chatBox = document.getElementById('chat-box');
+chatBox.scrollTop = chatBox.scrollHeight;
