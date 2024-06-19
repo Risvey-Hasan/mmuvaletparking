@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       exit();
     }
 
-    $sql = "INSERT INTO messages(subject, message,user_id)
+    $sql = "INSERT INTO faq(subject, message,user_id)
                 VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sss", $subject, $message,$id);

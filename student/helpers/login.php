@@ -24,6 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(password_verify($password,$row['password'])){
             if($row['privilege'] == 1){
                 $_SESSION['User'] = $row["id"];
+                $_SESSION['username'] = $row['email'];
                 header("location:../index.php");
                 }
                 else if($row['privilege'] == 2){

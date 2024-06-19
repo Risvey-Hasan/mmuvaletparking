@@ -19,10 +19,10 @@ require_once("include/connection.php");
         $total_orders = $row['total_orders'];
 
         // Query to get total count of support
-        $sql = "SELECT COUNT(*) AS total_messages FROM messages";
+        $sql = "SELECT COUNT(*) AS total_faqs FROM faq";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
-        $total_messages = $row['total_messages'];
+        $total_faqs = $row['total_faqs'];
          
         // Query to get total count of products
         $sql = "SELECT COUNT(*) AS total_products FROM products";
@@ -38,8 +38,8 @@ require_once("include/connection.php");
             </div>
             <div class="box box2">
                 <i class="uil uil-comments"></i>
-                <span class="text">Get Support</span>
-                <span class="number"><?php echo $total_messages ?></span>
+                <span class="text">FAQs</span>
+                <span class="number"><?php echo $total_faqs ?></span>
             </div>
             <div class="box box3">
                 <i class="uil uil-share"></i>

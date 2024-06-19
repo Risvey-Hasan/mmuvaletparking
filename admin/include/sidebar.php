@@ -19,7 +19,7 @@
                     <span class="link-name">Remove Student</span>
                 </a></li>
 
-                <li><a href="assist_student.php">
+                <li><a href="faq-admin.php">
                      <i class="uil uil-comments"></i>
                     <span class="link-name">FAQ</span>
                 </a></li>
@@ -31,6 +31,10 @@
                     <i class="uil uil-newspaper"></i>
                     <span class="link-name">Update News & Announcement</span>
                 </a></li>
+                <li><a href="contact-user.php">
+                        <i class="uil uil-newspaper"></i>
+                        <span class="link-name">Contact User</span>
+                    </a></li>
             </ul>
             <ul class="logout-mode">
                 <li><a href="function/logout.php">
