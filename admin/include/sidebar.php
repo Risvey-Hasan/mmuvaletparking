@@ -23,7 +23,7 @@
                      <i class="uil uil-comments"></i>
                     <span class="link-name">FAQ</span>
                 </a></li>
-                <li><a href="student_info.php">
+                <li><a href="update-student.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Update Student Info</span>
                 </a></li>

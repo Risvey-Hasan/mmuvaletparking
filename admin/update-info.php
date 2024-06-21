@@ -1,5 +1,5 @@
 <?php 
-$pageTitle = "Update Artist Information";
+$pageTitle = "Update Student Information";
 require_once ("function/authentication.php");
 require_once("include/header.php"); 
 require_once("include/sidebar.php");
@@ -13,7 +13,7 @@ require_once ("function/validate.php");
                 $id = validate_input($_GET['id']);
             } 
             else{
-                header("location: student_info.php");
+                header("location: update-student.php");
                 exit();
             }           
             $sql = "SELECT * FROM users WHERE id = ?";

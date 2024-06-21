@@ -25,7 +25,7 @@ body {
 }
 
 .chat-box {
-    padding: 20px;
+    padding: 50px;
     flex-grow: 1;
     overflow-y: auto;
     display: flex;
@@ -40,15 +40,15 @@ body {
 }
 
 .chat-message.admin {
-    background-color: #a8b9ff;
+    background-color: rgba(168, 185, 255, 0.65);
     color: black;
-    align-self: flex-start;
+    align-self: flex-end;
 }
 
 .chat-message.user {
-    background-color: #ecf0f1;
-    color: #2c3e50;
-    align-self: flex-end;
+    background-color: #6099ff;
+    color: white;
+    align-self: flex-start;
 }
 
 .chat-image {
@@ -103,6 +103,6 @@ body {
 
 .timestamp {
     font-size: 0.75em;
-    color: #888;
-    margin-bottom: 5px;
+    color: rgba(0, 0, 0, 0.57);
+    margin-bottom: 8px;
 }

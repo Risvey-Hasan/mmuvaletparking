@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Update Artist Information";
+$pageTitle = "Update Student Information";
 require_once("function/authentication.php");
 require_once("include/header.php");
 require_once("include/sidebar.php");
@@ -20,7 +20,7 @@ $result = $conn->query($sql);
     <div class="overview">
         <div class="title">
             <i class="uil uil-tachometer-fast-alt"></i>
-            <span class="text">Artists</span>
+            <span class="text">Students</span>
         </div>
         <?php
         if (isset($_SESSION["msg"])) {
@@ -60,7 +60,7 @@ $result = $conn->query($sql);
                         echo "<td>" . htmlspecialchars($row["email"]) . "</td>";
                         echo "<td>" . htmlspecialchars($row["phone"]) . "</td>";
                         echo "<td>" . htmlspecialchars($row["address"]) . "</td>";
-                        echo "<td><a href='update_artist.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure you want to update this artist info?\")'>Update Info</a></td>";
+                        echo "<td><a href='update-info.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure you want to update this artist info?\")'>Update Info</a></td>";
                         echo "</tr>";
                         $i++;
                     }

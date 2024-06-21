@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $_SESSION["msg"] = '<div class="alert alert-danger">
         <strong>Sorry, some fields in the student information form are empty</strong>
     </div>';
-      header("location:../student_info.php");
+      header("location:../update-student.php");
       exit();
     }
 
@@ -26,13 +26,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if($stmt->execute()){
         $_SESSION["msg"] = '<div class="alert alert-success">
-        <strong>Artist Information is  Successfully Updated</strong>
+        <strong>Student Information is  Successfully Updated</strong>
         </div>';
-        header("location:../student_info.php");
+        header("location:../update-student.php");
     }else{
         $_SESSION["msg"] = '<div class="alert alert-info">
         <strong>Oops Something went wrong</strong>
         </div>';
-        header("location:../student_info.php");
+        header("location:../update-student.php");
     }
 }
