@@ -18,7 +18,7 @@ require_once("include/connection.php");
             }
             unset($_SESSION["msg"]);
         ?>
-        <div class="message-table">
+        <div class="table-design">
             <table>
                 <thead>
                     <tr>

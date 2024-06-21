@@ -15,7 +15,7 @@ $result = $conn->query($sql);
             <i class="uil uil-tachometer-fast-alt"></i>
             <span class="text">Product Listings</span>
         </div>
-        <div class="message-table">
+        <div class="table-design">
             <table>
                 <thead>
                     <tr>

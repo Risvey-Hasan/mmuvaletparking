@@ -35,6 +35,10 @@
                         <i class="uil uil-newspaper"></i>
                         <span class="link-name">Contact User</span>
                     </a></li>
+                <li><a href="slot-management.php">
+                        <i class="uil uil-newspaper"></i>
+                        <span class="link-name">Manage Slots</span>
+                    </a></li>
             </ul>
             <ul class="logout-mode">
                 <li><a href="function/logout.php">

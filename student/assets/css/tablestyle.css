@@ -1,27 +1,27 @@
-.message-table {
+.table-design {
     margin-top: 20px;
 }
 
-.message-table h2 {
+.table-design h2 {
     margin-bottom: 10px;
 }
 
-.message-table table {
+.table-design table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.message-table th, .message-table td {
+.table-design th, .table-design td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
-.message-table th {
+.table-design th {
     background-color: #f2f2f2;
 }
 
-.message-table tbody tr:nth-child(even) {
+.table-design tbody tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 

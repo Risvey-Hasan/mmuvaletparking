@@ -12,7 +12,7 @@ require_once("include/connection.php");
             <span class="text">Messages</span>
         </div>
         <a  class="btn" href="get_support.php" >Get Support</a>
-        <div class="message-table">
+        <div class="table-design">
         <table>
             <thead>
                 <tr>

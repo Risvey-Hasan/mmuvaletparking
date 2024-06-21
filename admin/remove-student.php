@@ -36,7 +36,7 @@ $result = $conn->query($sql);
             </form>
         </div>
 
-        <div class="message-table">
+        <div class="table-design">
             <table>
                 <thead>
                     <tr>

@@ -18,7 +18,7 @@ $result = $stmt->get_result();
             <i class="uil uil-tachometer-fast-alt"></i>
             <span class="text">Orders</span>
         </div>
-        <div class="message-table">
+        <div class="table-design">
             <table>
                 <thead>
                     <tr>
