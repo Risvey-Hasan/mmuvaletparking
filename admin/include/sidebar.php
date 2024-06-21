@@ -14,7 +14,7 @@
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                <li><a href="remove_student.php">
+                <li><a href="remove-student.php">
                      <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Remove Student</span>
                 </a></li>
