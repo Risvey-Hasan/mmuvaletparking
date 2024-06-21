@@ -10,15 +10,15 @@
     <div class="container">
         <h2>Student Registration</h2>
         <form id="registrationForm" method="post" action="helpers/register.php" onsubmit="return validateRegiterform()">
-           <div class="form-group">
-               <?php
-                   session_start();
+            <div class="form-group">
+                <?php
+                    session_start();
                     if(isset($_SESSION["msg"])){
                         echo $_SESSION["msg"];
                     }
                     unset($_SESSION["msg"]);
                 ?>
-           </div>
+            </div>
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
@@ -45,7 +45,10 @@
             </div>
             <button type="submit">Register</button>
         </form>
+                </br>
+                </br>
+        <button onclick="window.location.href='login.php'">Back to Login</button>
     </div>
+    <script src="assets/js/formscript.js"></script>
 </body>
-<script src="assets/js/formscript.js"></script>
 </html>

@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Assist Students";
+$pageTitle = "Assist Artists"; 
 require_once("function/authentication.php");
 require_once("include/header.php"); 
 require_once("include/sidebar.php");
@@ -46,7 +46,6 @@ require_once("include/connection.php");
                         if ($row["reply"] == "") {
                             echo "<td><button class='btn reply-btn' data-id='" . $row["id"] . "' data-subject='" . htmlspecialchars($row["subject"]) . "' data-message='" . htmlspecialchars($row["message"]) . "'>Reply</button></td>";
                         } else {
-                            
                             echo "<td></td>";
                         }
                         echo "</tr>";
@@ -67,7 +66,7 @@ require_once("include/connection.php");
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Reply to Message</h2>
-        <form method="POST" action="helpers\assist_student.php">
+        <form method="POST" action="helpers/asist_student.php">
             <input type="hidden" name="message_id" id="message_id">
             <div class="form-group">
                 <label for="subject">Subject</label>
