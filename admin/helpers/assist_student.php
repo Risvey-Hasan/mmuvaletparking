@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $sql = "UPDATE messages SET reply = ? WHERE id = ?";
+    $sql = "UPDATE faq SET reply = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $reply, $message_id);
 

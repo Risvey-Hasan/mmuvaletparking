@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         $_SESSION["msg"] = '<div class="alert alert-danger">
             <strong>Invalid student ID</strong>
         </div>';
-        header("location:../remove_artist.php");
+        header("location:../remove-student.php");
         exit();
     }
 
@@ -22,16 +22,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
         $_SESSION["msg"] = '<div class="alert alert-success">
             <strong>Artist deleted successfully</strong>
         </div>';
-        header("location:../remove_artist.php");
+        header("location:../remove-student.php");
     } else {
         $_SESSION["msg"] = '<div class="alert alert-danger">
             <strong>Oops! Something went wrong</strong>
         </div>';
-        header("location:../remove_artist.php");
+        header("location:../remove-student.php");
     }
 } else {
     $_SESSION["msg"] = '<div class="alert alert-danger">
         <strong>Invalid request method</strong>
     </div>';
-    header("location:../remove_artist.php");
+    header("location:../remove-student.php");
 }
