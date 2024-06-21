@@ -43,4 +43,5 @@ if ($messageResult) {
 </div>
 
 <script src="assets/js/chatroom.js"></script>
+<script>console.log("<?php echo "$loggedInUser"; ?>")</script>
 <?php require_once("include/footer.php"); ?>

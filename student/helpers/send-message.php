@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($messageContent) {
-        $sql = "INSERT INTO messages (sender, receiver, content, type) VALUES ('$sender', 'admin', '$messageContent', '$messageType')";
+        $sql = "INSERT INTO messages (sender, receiver, content, type) VALUES ('$sender', 'admin@gmail.com', '$messageContent', 'text')";
         if (mysqli_query($conn, $sql)) {
             $response['success'] = true;
             $response['message'] = [

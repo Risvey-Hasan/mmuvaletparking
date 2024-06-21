@@ -33,20 +33,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users(name, email, phone, address, password)
-                VALUES (?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $name, $email, $phone, $address, $hashed_password);
-        if($stmt->execute()){
-            $_SESSION["msg"] = '<div class="alert alert-success">
-            <strong>Registration Successful</strong><a href="login.php"> Login</a>
-            </div>';
-            header("location:../register.php");
-        }else{
-            $_SESSION["msg"] = '<div class="alert alert-danger">
-            <strong>Something went wrong</strong>
-            </div>';
-            header("location:../register.php");
-        }
+    // Check if the email already exists
+    $email_check_sql = "SELECT email FROM users WHERE email = ?";
+    $email_stmt = $conn->prepare($email_check_sql);
+    $email_stmt->bind_param("s", $email);
+    $email_stmt->execute();
+    $email_stmt->store_result();
+
+    if ($email_stmt->num_rows > 0) {
+        $_SESSION["msg"] = '<div class="alert alert-danger">
+    <strong>Email already exists</strong> Please use a different email address.
+    </div>';
+        header("location:../register.php");
+        exit();
+    }
+
+    $email_stmt->close();
+
+// Insert the new user
+    $sql = "INSERT INTO users(name, email, phone, address, password) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssss", $name, $email, $phone, $address, $hashed_password);
+
+    if ($stmt->execute()) {
+        $_SESSION["msg"] = '<div class="alert alert-success">
+    <strong>Registration Successful</strong><a href="login.php"> Login</a>
+    </div>';
+        header("location:../register.php");
+    } else {
+        $_SESSION["msg"] = '<div class="alert alert-danger">
+    <strong>Something went wrong</strong>
+    </div>';
+        header("location:../register.php");
+    }
+
+    $stmt->close();
+    $conn->close();
+
 }
 ?>

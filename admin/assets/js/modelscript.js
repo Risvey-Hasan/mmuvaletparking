@@ -1,7 +1,7 @@
 // JavaScript for handling the modal
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('replyModal');
-    var span = document.getElementsByClassName('close')[0];
+    var spanElement = document.getElementsByClassName('close')[0];
 
     document.querySelectorAll('.reply-btn').forEach(function(button) {
         button.addEventListener('click', function() {
@@ -11,10 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = 'block';
         });
     });
-
-    span.onclick = function() {
-        modal.style.display = 'none';
-    }
 
     window.onclick = function(event) {
         if (event.target == modal) {
