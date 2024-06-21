@@ -20,6 +20,9 @@
             </div>
             <button type="submit">Login</button>
         </form>
+</br>
+</br>
+        <button onclick="window.location.href='register.php'">Registration</button>
     </div>
     <script src="assets/js/formscript.js"></script>
 </body>
