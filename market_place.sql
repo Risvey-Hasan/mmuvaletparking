@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2024 at 10:17 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Jun 21, 2024 at 01:43 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,44 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `announcements`
+--
+
+CREATE TABLE `announcements` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `announcements`
+--
+
+INSERT INTO `announcements` (`id`, `title`, `content`, `image`, `created_at`) VALUES
+(3, 'Hello', 'Hey', 'Screenshot 2023-11-08 163035.png', '2024-06-12 05:30:04'),
+(4, 'Hej', 'Swedish', 'Screenshot 2023-11-08 201728.png', '2024-06-12 05:57:21'),
+(6, 'Test 33', '23123131', 'Screenshot 2023-12-05 213526.png', '2024-06-21 08:04:47'),
+(12, 'Test 123', 'adsadadadasdasda', 'Screenshot 2023-12-05 213526.png', '2024-06-21 11:42:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faq`
+--
+
+CREATE TABLE `faq` (
+  `id` int(11) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `reply` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `messages`
 --
 
@@ -33,17 +71,20 @@ CREATE TABLE `messages` (
   `message` text NOT NULL,
   `user_id` int(11) NOT NULL,
   `reply` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sender` varchar(255) NOT NULL,
+  `receiver` varchar(255) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`id`, `subject`, `message`, `user_id`, `reply`, `created_at`) VALUES
-(1, 'Product', 'Error in product services', 1, NULL, '2024-05-14 09:38:28'),
-(2, 'Linking of', 'tttt', 1, 'We are working on it', '2024-05-14 10:14:16'),
-(3, 'Paymment', 'Im having issues with the my customers payment.', 5, NULL, '2024-05-16 08:14:07');
+INSERT INTO `messages` (`id`, `subject`, `message`, `user_id`, `reply`, `created_at`, `sender`, `receiver`, `timestamp`) VALUES
+(1, 'Product', 'Error in product services', 1, NULL, '2024-05-14 09:38:28', '', '', '2024-06-21 07:01:21'),
+(2, 'Linking of', 'tttt', 1, 'We are working on it', '2024-05-14 10:14:16', '', '', '2024-06-21 07:01:21'),
+(3, 'Paymment', 'Im having issues with the my customers payment.', 5, NULL, '2024-05-16 08:14:07', '', '', '2024-06-21 07:01:21');
 
 -- --------------------------------------------------------
 
@@ -139,11 +180,24 @@ INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `password`, `pri
 (8, 'Artist Six', 'artist6@example.com', '1234567895', 'Address 6', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
 (9, 'Artist Seven', 'artist7@example.com', '1234567896', 'Address 7', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
 (10, 'Artist Eight', 'artist8@example.com', '1234567897', 'Address 8', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
-(11, 'Artist Nine', 'artist9@gmail.com', '1234567898', 'No. 7 Kuala Lumpur, Malaysia', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1);
+(11, 'Artist Nine', 'artist9@gmail.com', '1234567898', 'No. 7 Kuala Lumpur, Malaysia', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
+(13, 'daniel', 'daniel@gmail.com', '013333343', 'Cyberjaya', '$2y$10$lrRILOHPV1T9EOGsIQ16jewniEMVX/zScBR.n964oYy2QjcXB0aiG', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `announcements`
+--
+ALTER TABLE `announcements`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `faq`
+--
+ALTER TABLE `faq`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `messages`
@@ -174,6 +228,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `announcements`
+--
+ALTER TABLE `announcements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `faq`
+--
+ALTER TABLE `faq`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
@@ -195,7 +261,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -9,20 +9,24 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$result = $conn->query("SELECT * FROM announcements ORDER BY id DESC");
-$latestAnnouncements = [];
-$popularAnnouncements = [];
+// Define the default sort order
+$sortOrder = "DESC";
+
+// Check if the oldest tab is active
+if (isset($_GET['tab']) && $_GET['tab'] === 'oldest') {
+    $sortOrder = "ASC";
+}
+
+$stmt = $conn->prepare("SELECT * FROM announcements ORDER BY created_at $sortOrder");
+$stmt->execute();
+$result = $stmt->get_result();
+
+$announcements = [];
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        // Store announcements into respective arrays
-        if (count($latestAnnouncements) < 3) {
-            $latestAnnouncements[] = $row;
-        }
-        $popularAnnouncements[] = $row;
+        $announcements[] = $row;
     }
-} else {
-    echo "<p>No announcements found.</p>";
 }
 
 $conn->close();
@@ -38,12 +42,24 @@ $conn->close();
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 80px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
         }
 
         .tabs {
@@ -54,12 +70,24 @@ $conn->close();
 
         .tab {
             padding: 10px 20px;
-            border: 1px solid #000;
+            border: none;
             cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            color: #333;
+            background-color: aliceblue;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+
+        .tab:hover {
+            background-color: deepskyblue;
         }
 
         .active {
-            background-color: #ddd;
+            background-color: dodgerblue;
+            border-color: #bbb;
         }
 
         .announcement {
@@ -72,20 +100,36 @@ $conn->close();
             margin-bottom: 20px;
             border: 1px solid #ddd;
             padding: 10px;
+            border-radius: 4px;
+            background-color: #fafafa;
+            transition: box-shadow 0.3s;
+        }
+
+        .announcement-item:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .announcement-item img {
-            width: 200px;
-            /* Increased width */
+            width: 250px;
             height: auto;
-            /* Auto height to maintain aspect ratio */
             margin-right: 20px;
             margin-left: 0;
-            /* Align to the left */
+            border-radius: 4px;
         }
 
         .announcement-item div {
             flex-grow: 1;
+        }
+
+        .announcement-item h3 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #555;
+        }
+
+        .announcement-item p {
+            margin: 10px 0 0;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -94,26 +138,18 @@ $conn->close();
     <div class="container">
         <h1>News & Announcements</h1>
         <div class="tabs">
-            <div class="tab active" onclick="showTab('latest')">Latest</div>
-            <div class="tab" onclick="showTab('popular')">Popular</div>
+            <a class="tab <?php echo (!isset($_GET['tab']) || (isset($_GET['tab']) && $_GET['tab'] === 'latest')) ? 'active' : ''; ?>"
+                href="?tab=latest">Latest</a>
+            <a class="tab <?php echo (isset($_GET['tab']) && $_GET['tab'] === 'oldest') ? 'active' : ''; ?>"
+                href="?tab=oldest">Oldest</a>
         </div>
-        <div id="latest" class="announcement">
-            <?php foreach ($latestAnnouncements as $announcement): ?>
+        <div class="announcement">
+            <?php foreach ($announcements as $announcement): ?>
                 <div class='announcement-item'>
-                    <h3><?= htmlspecialchars($announcement['title']) ?></h3>
-                    <p><?= nl2br(htmlspecialchars($announcement['content'])) ?></p>
-                    <?php if (!empty($announcement['image'])): ?>
-                        <?php $imagePath = '../admin/uploads/' . htmlspecialchars($announcement['image']); ?>
-                        <img src='<?= $imagePath ?>' alt='Announcement Image'>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
-        <div id="popular" class="announcement" style="display: none;">
-            <?php foreach ($popularAnnouncements as $announcement): ?>
-                <div class='announcement-item'>
-                    <h3><?= htmlspecialchars($announcement['title']) ?></h3>
-                    <p><?= nl2br(htmlspecialchars($announcement['content'])) ?></p>
+                    <div>
+                        <h3><?= htmlspecialchars($announcement['title']) ?></h3>
+                        <p><?= nl2br(htmlspecialchars($announcement['content'])) ?></p>
+                    </div>
                     <?php if (!empty($announcement['image'])): ?>
                         <?php $imagePath = '../admin/uploads/' . htmlspecialchars($announcement['image']); ?>
                         <img src='<?= $imagePath ?>' alt='Announcement Image'>
@@ -131,7 +167,7 @@ $conn->close();
             if (tab === 'latest') {
                 document.getElementById('latest').style.display = 'block';
                 document.querySelectorAll('.tab')[0].classList.add('active');
-            } else {
+            } else if (tab === 'oldest') {
                 document.getElementById('popular').style.display = 'block';
                 document.querySelectorAll('.tab')[1].classList.add('active');
             }
