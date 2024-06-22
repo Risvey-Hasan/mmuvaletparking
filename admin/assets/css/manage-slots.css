@@ -1,0 +1,176 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f9;
+    margin: 0;
+    padding: 0;
+}
+
+.dash-content {
+    margin: 20px;
+}
+
+.overview .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #0277bd;
+    font-weight: bold;
+}
+
+.overview .title i {
+    font-size: 32px;
+    margin-right: 10px;
+}
+
+.table-design {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+}
+
+.table-design table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.table-design table thead tr {
+    background-color: #e3f2fd;
+    color: #0277bd;
+    border-bottom: 2px solid #0277bd;
+}
+
+.table-design table thead th,
+.table-design table tbody td {
+    padding: 15px 20px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table-design table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease;
+}
+
+.table-design table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table-design table tbody tr:last-of-type {
+    border-bottom: none;
+}
+
+.table-design table tbody tr:hover {
+    background-color: #e0f7fa;
+}
+
+.table-design .btn {
+    background-color: #0277bd;
+    color: #ffffff;
+    border: none;
+    padding: 8px 10px; /* Smaller button sizes */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 10px;
+}
+
+.table-design .btn:hover {
+    background-color: #01579b;
+    transform: translateY(-2px);
+}
+
+.table-design .btn:focus {
+    outline: none;
+}
+
+.table-design .btn.delete-btn {
+    background-color: #e53935;
+}
+
+.table-design .btn.delete-btn:hover {
+    background-color: #c62828;
+}
+
+#addSlotForm,
+#updateSlotForm,
+#deleteSlotForm {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    width: 50%;
+    margin: 0 auto;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    z-index: 1000;
+    display: none;
+}
+
+#addSlotForm label,
+#updateSlotForm label,
+#deleteSlotForm p {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+#addSlotForm input,
+#addSlotForm select,
+#updateSlotForm input,
+#updateSlotForm select {
+    width: calc(100% - 22px);
+    padding: 12px 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#addSlotForm button,
+#updateSlotForm button,
+#deleteSlotForm button {
+    width: calc(50% - 10px);
+    margin: 0 5px;
+}
+
+#deleteSlotForm p {
+    font-size: 18px;
+    text-align: center;
+}
+
+#addSlotForm .btn.cancel-update,
+#updateSlotForm .btn.cancel-update,
+#deleteSlotForm .btn.cancel-delete {
+    background-color: #b0bec5;
+    color: #ffffff;
+}
+
+#addSlotForm .btn.cancel-update:hover,
+#updateSlotForm .btn.cancel-update:hover,
+#deleteSlotForm .btn.cancel-delete:hover {
+    background-color: #90a4ae;
+}
+
+/* Overlay for modal forms */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.show {
+    display: block !important;
+}

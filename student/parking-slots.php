@@ -1,0 +1,90 @@
+<?php
+$pageTitle = "Manage Parking Slots";
+require_once("function/authentication.php");
+require_once("include/header.php");
+require_once("include/sidebar.php");
+require_once("include/connection.php");
+
+$successMessages = [];
+
+// Check if the form is submitted to add to cart
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart'])) {
+    $user_id = $_SESSION['username'];
+    $slot_id = $_POST['slot_id'];
+
+    // Check if the item is already in the cart
+    $checkCartQuery = "SELECT * FROM cart WHERE user_id = ? AND slot_id = ?";
+    $stmt = $conn->prepare($checkCartQuery);
+    $stmt->bind_param("si", $user_id, $slot_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        // Item already in cart
+        $successMessages[$slot_id] = "Already In Cart";
+    } else {
+        // Insert the selected slot into the cart table
+        $insertCartQuery = "INSERT INTO cart (user_id, slot_id) VALUES (?, ?)";
+        $stmt = $conn->prepare($insertCartQuery);
+        $stmt->bind_param("si", $user_id, $slot_id);
+        $stmt->execute();
+        $stmt->close();
+
+        // Store success message for the specific slot
+        $successMessages[$slot_id] = "Item added to cart successfully!";
+    }
+}
+
+// Get all the slots from the database
+$slotQuery = "SELECT * FROM `parking_slots`";
+$slotResult = mysqli_query($conn, $slotQuery);
+$slots = [];
+if ($slotResult) {
+    while ($row = mysqli_fetch_assoc($slotResult)) {
+        $slots[] = $row;
+    }
+}
+?>
+
+<div class="dash-content">
+    <div class="overview">
+        <div class="title">
+            <i class="uil uil-tachometer-fast-alt"></i>
+            <span class="text">View Slots</span>
+        </div>
+
+        <!-- Display slots as cards -->
+        <div class="cards">
+            <?php
+            if (!empty($slots)) {
+                foreach ($slots as $slot) {
+                    echo "<div class='card'>";
+                    echo "<img src='../images/" . htmlspecialchars($slot["image"]) . "' alt='" . htmlspecialchars($slot["image"]) . "' class='slot-image'>";
+                    echo "<div class='container'>";
+                    echo "<h4><b>Faculty: " . htmlspecialchars($slot["faculty"]) . "</b></h4>";
+                    echo "<p>Size: " . htmlspecialchars($slot["size"]) . "</p>";
+                    echo "<p>Status: " . htmlspecialchars($slot["status"]) . "</p>";
+                    echo "<p>Price per Hour: RM" . htmlspecialchars($slot["price_per_hour"]) . "</p>";
+                    echo "<p>Amenities: " . htmlspecialchars($slot["amenities"]) . "</p>";
+                    echo "<p>Last Updated: " . htmlspecialchars($slot["last_updated"]) . "</p>";
+                    echo "<form method='post' action='parking-slots.php'>";
+                    echo "<input type='hidden' name='slot_id' value='" . $slot['id'] . "'>";
+                    echo "<button type='submit' name='add_to_cart' class='btn book-btn'>Add to Cart</button>";
+                    echo "</form>";
+
+                    // Display success message if the item was added to cart
+                    if (isset($successMessages[$slot['id']])) {
+                        echo "<p class='success-message'>" . $successMessages[$slot['id']] . "</p>";
+                    }
+
+                    echo "</div>";
+                    echo "</div>";
+                }
+            } else {
+                echo "<p>No slots found</p>";
+            }
+            ?>
+        </div>
+    </div>
+</div>
+
+<?php require_once("include/footer.php"); ?>

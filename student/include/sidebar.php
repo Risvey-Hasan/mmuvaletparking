@@ -25,9 +25,13 @@
                     <i class="uil uil-newspaper"></i>
                     <span class="link-name">News & Announcement</span>
                 </a></li>
-            <li><a href="parkingslot.php">
+            <li><a href="parking-slots.php">
                     <i class="uil uil-parking-circle"></i>
                     <span class="link-name">Parking Slot</span>
+                </a></li>
+            <li><a href="cart.php">
+                    <i class="uil uil-shopping-cart"></i>
+                    <span class="link-name">Your Cart</span>
                 </a></li>
             <li><a href="contact.php">
                     <i class="uil uil-phone"></i>

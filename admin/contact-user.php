@@ -79,5 +79,5 @@ if ($messageResult) {
 
 
 </div>
-
+<script src="assets/js/chatroom.js"></script>
 <?php require_once("include/footer.php"); ?>
