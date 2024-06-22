@@ -13,7 +13,7 @@ $cartQuery = "SELECT cart.id AS cart_id, parking_slots.* FROM cart
               JOIN parking_slots ON cart.slot_id = parking_slots.id 
               WHERE cart.user_id = ?";
 $stmt = $conn->prepare($cartQuery);
-$stmt->bind_param("i", $user_id);
+$stmt->bind_param("s", $user_id);
 $stmt->execute();
 $cartResult = $stmt->get_result();
 $cartItems = [];
@@ -45,7 +45,6 @@ $stmt->close();
                         <th>Status</th>
                         <th>Price per Hour</th>
                         <th>Amenities</th>
-                        <th>Last Updated</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,20 +61,19 @@ $stmt->close();
                             echo "<td>" . htmlspecialchars($item["status"]) . "</td>";
                             echo "<td>RM" . htmlspecialchars($item["price_per_hour"]) . "</td>";
                             echo "<td>" . htmlspecialchars($item["amenities"]) . "</td>";
-                            echo "<td>" . htmlspecialchars($item["last_updated"]) . "</td>";
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='8'>No items in your cart</td></tr>";
+                        echo "<tr><td colspan='7'>No items in your cart</td></tr>";
                     }
                     ?>
                     </tbody>
                     <?php if (!empty($cartItems)) { ?>
                         <tfoot>
                         <tr>
-                            <td colspan="5"></td>
-                            <td colspan="2">Total: RM<span id="total-amount"><?php echo number_format($totalAmount, 2); ?></span></td>
-                            <td><button type="submit" class="btn">Checkout</button></td>
+                            <td colspan="5" style="border:none;"></td>
+                            <td style="border:none">Total: RM<span id="total-amount"><?php echo number_format($totalAmount, 2); ?></span></td>
+                            <td style="border: none"><button type="submit" class="btn">Checkout</button></td>
                         </tr>
                         </tfoot>
                     <?php } ?>
@@ -88,6 +86,7 @@ $stmt->close();
 <?php require_once("include/footer.php"); ?>
 
 <script>
+    document.getElementById('total-amount').textContent = "0";
     document.querySelectorAll('.item-checkbox').forEach(checkbox => {
         checkbox.addEventListener('change', function() {
             let total = 0;
