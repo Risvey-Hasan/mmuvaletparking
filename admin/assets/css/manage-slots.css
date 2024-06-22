@@ -69,19 +69,23 @@ body {
 }
 
 .table-design .btn {
-    background-color: #0277bd;
+    background: linear-gradient(to right, #0277bd, #0288d1);
     color: #ffffff;
     border: none;
-    padding: 8px 10px; /* Smaller button sizes */
+    padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-size: 10px;
+    transition: background 0.3s ease, box-shadow 0.2s ease;
+    font-size: 12px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px;
 }
 
 .table-design .btn:hover {
-    background-color: #01579b;
-    transform: translateY(-2px);
+    background: linear-gradient(to right, #0288d1, #0277bd);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .table-design .btn:focus {
@@ -89,13 +93,34 @@ body {
 }
 
 .table-design .btn.delete-btn {
-    background-color: #e53935;
+    background: linear-gradient(to right, #e53935, #ef5350);
 }
 
 .table-design .btn.delete-btn:hover {
-    background-color: #c62828;
+    background: linear-gradient(to right, #ef5350, #e53935);
 }
 
+#addSlotBtn {
+    background: linear-gradient(to right, #ff9800, #ffc107);
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px; /* Adjust padding for button size */
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    font-size: 14px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    margin: 20px 0;
+    width: 150px; /* Adjust width as desired */
+}
+
+#addSlotBtn:hover {
+    background: linear-gradient(to right, #ffc107, #ff9800);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
 #addSlotForm,
 #updateSlotForm,
 #deleteSlotForm {
@@ -120,6 +145,7 @@ body {
     margin-bottom: 10px;
     color: #333;
     font-weight: bold;
+    gap: 10px;
 }
 
 #addSlotForm input,
@@ -159,7 +185,80 @@ body {
     background-color: #90a4ae;
 }
 
-/* Overlay for modal forms */
+#updateSlotForm {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    width: 60%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: none;
+}
+
+#updateSlotForm label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+#updateSlotForm input,
+#updateSlotForm select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#updateSlotForm button {
+    width: 100px; /* Adjust button width */
+    margin: 0 10px; /* Adjust horizontal spacing */
+}
+
+#updateSlotForm .btn.cancel-delete {
+    margin-left: 20px; /* Additional margin for No button */
+}
+
+#deleteSlotForm {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    width: 50%;
+    max-width: 400px;
+    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: none;
+    text-align: center; /* Center align buttons */
+}
+
+#deleteSlotForm p {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#deleteSlotForm button {
+    width: 100px; /* Adjust button width */
+    margin: 0 10px; /* Adjust horizontal spacing */
+}
+
+#deleteSlotForm .btn.cancel-delete {
+    margin-left: 20px; /* Additional margin for No button */
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -174,3 +273,16 @@ body {
 .show {
     display: block !important;
 }
+
+/* Horizontal button group */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.button-group .btn {
+    flex: 1;
+}
+
