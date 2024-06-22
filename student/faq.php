@@ -11,7 +11,7 @@ require_once("include/connection.php");
             <i class="uil uil-tachometer-fast-alt"></i>
             <span class="text">Messages</span>
         </div>
-        <a  class="btn" href="get_support.php" >Get Support</a>
+        <a  class="btn" href="get_support.php" >Submit a Question</a>
         <div class="table-design">
         <table>
             <thead>
