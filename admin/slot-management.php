@@ -5,72 +5,100 @@ require_once("include/header.php");
 require_once("include/sidebar.php");
 require_once("include/connection.php");
 
+$errorMessage = '';
+
 // Handle form submission to create a new slot
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_slot'])) {
     $faculty = $_POST['faculty'];
+    $slot_number = $_POST['slot_number'];
     $size = $_POST['size'];
     $status = $_POST['status'];
     $price_per_hour = $_POST['price_per_hour'];
     $amenities = isset($_POST['amenities']) ? $_POST['amenities'] : '';
 
-    // Handle file upload
-    $image = "slots/default.png"; // Default image
-    if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-        $uploadDir = '../images/slots/';
-        $uploadFile = $uploadDir . basename($_FILES['image']['name']);
-
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
-            $image = "slots/" . basename($_FILES['image']['name']);
-        }
-    }
-
-    $insertQuery = "INSERT INTO `parking_slots` (faculty, size, status, price_per_hour, amenities, image) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($insertQuery);
-    $stmt->bind_param("sssdss", $faculty, $size, $status, $price_per_hour, $amenities, $image);
+    // Check if slot_number already exists
+    $checkQuery = "SELECT id FROM `parking_slots` WHERE slot_number = ?";
+    $stmt = $conn->prepare($checkQuery);
+    $stmt->bind_param("s", $slot_number);
     $stmt->execute();
-    $stmt->close();
+    $stmt->store_result();
 
-    // Redirect to avoid form resubmission
-    header("Location: slot-management.php");
-    exit();
+    if ($stmt->num_rows > 0) {
+        $errorMessage = "Slot number already exists.";
+    } else {
+        // Handle file upload
+        $image = "slots/default.png"; // Default image
+        if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+            $uploadDir = '../images/slots/';
+            $uploadFile = $uploadDir . basename($_FILES['image']['name']);
+
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+                $image = "slots/" . basename($_FILES['image']['name']);
+            }
+        }
+
+        $insertQuery = "INSERT INTO `parking_slots` (faculty, size, status, price_per_hour, amenities, image, slot_number) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($insertQuery);
+        $stmt->bind_param("sssdsss", $faculty, $size, $status, $price_per_hour, $amenities, $image, $slot_number);
+        $stmt->execute();
+        $stmt->close();
+
+        // Redirect to avoid form resubmission
+        header("Location: slot-management.php");
+        exit();
+    }
+    $stmt->close();
 }
 
 // Handle form submission to update a slot
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_slot'])) {
     $id = $_POST['id'];
     $size = $_POST['size'];
+    $slot_number = $_POST['slot_number'];
     $status = $_POST['status'];
     $price_per_hour = $_POST['price_per_hour'];
     $amenities = $_POST['amenities'];
 
-    // Handle file upload
-    $image = "slots/default.png"; // Default image
-    if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
-        $uploadDir = '../images/slots/';
-        $uploadFile = $uploadDir . basename($_FILES['image']['name']);
-        // Create the directory if it doesn't exist
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
-            $image = "slots/" . basename($_FILES['image']['name']);
-        }
-    } else {
-        // Get existing image if no new image is uploaded
-        $result = $conn->query("SELECT image FROM `parking_slots` WHERE id = $id");
-        $row = $result->fetch_assoc();
-        $image = $row['image'];
-    }
-
-    $updateQuery = "UPDATE `parking_slots` SET size=?, status=?, price_per_hour=?, amenities=?, image=?, last_updated=NOW() WHERE id=?";
-    $stmt = $conn->prepare($updateQuery);
-    $stmt->bind_param("sssdsi", $size, $status, $price_per_hour, $amenities, $image, $id);
+    // Check if slot_number already exists for another slot
+    $checkQuery = "SELECT id FROM `parking_slots` WHERE slot_number = ? AND id != ?";
+    $stmt = $conn->prepare($checkQuery);
+    $stmt->bind_param("si", $slot_number, $id);
     $stmt->execute();
-    $stmt->close();
+    $stmt->store_result();
 
-    // Redirect to avoid form resubmission
-    header("Location: slot-management.php");
-    exit();
+    if ($stmt->num_rows > 0) {
+        $errorMessage = "Slot number already exists.";
+    } else {
+        // Handle file upload
+        $image = "slots/default.png"; // Default image
+        if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+            $uploadDir = '../images/slots/';
+            $uploadFile = $uploadDir . basename($_FILES['image']['name']);
+            // Create the directory if it doesn't exist
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+                $image = "slots/" . basename($_FILES['image']['name']);
+            }
+        } else {
+            // Get existing image if no new image is uploaded
+            $result = $conn->query("SELECT image FROM `parking_slots` WHERE id = $id");
+            $row = $result->fetch_assoc();
+            $image = $row['image'];
+        }
+
+        $updateQuery = "UPDATE `parking_slots` SET size=?, status=?, price_per_hour=?, amenities=?, image=?, last_updated=NOW(), slot_number=? WHERE id=?";
+        $stmt = $conn->prepare($updateQuery);
+        $stmt->bind_param("ssdsssi", $size, $status, $price_per_hour, $amenities, $image, $slot_number, $id);
+        $stmt->execute();
+        $stmt->close();
+
+        // Redirect to avoid form resubmission
+        header("Location: slot-management.php");
+        exit();
+    }
+    $stmt->close();
 }
 
 // Handle deletion of a slot
@@ -110,10 +138,18 @@ if ($slotResult) {
 
             <!-- Add Slot Form (hidden by default) -->
             <div id="addSlotForm" style="display: none;">
+                <?php if ($errorMessage): ?>
+                    <div class="error-message">
+                        <?php echo htmlspecialchars($errorMessage); ?>
+                    </div>
+                <?php endif; ?>
                 <form action="slot-management.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="create_slot" value="1">
                     <label for="faculty">Faculty:</label>
                     <input type="text" id="faculty" name="faculty" maxlength="5" required>
+
+                    <label for="slot_number">Slot Number:</label>
+                    <input type="text" id="slot_number" name="slot_number" maxlength="8" required>
 
                     <label for="size">Size:</label>
                     <select id="size" name="size" required>
@@ -150,6 +186,7 @@ if ($slotResult) {
                 <tr>
                     <th>SN</th>
                     <th>Image</th>
+                    <th>Slot</th>
                     <th>Faculty</th>
                     <th>Size</th>
                     <th>Status</th>
@@ -168,6 +205,7 @@ if ($slotResult) {
                         echo "<tr>";
                         echo "<td>" . $i . "</td>";
                         echo "<td><img src='../images/" . htmlspecialchars($slot["image"]) . "' alt='Slot Image' style='width:70px;height:auto;'></td>";
+                        echo "<td>" . htmlspecialchars($slot["slot_number"]) . "</td>";
                         echo "<td>" . htmlspecialchars($slot["faculty"]) . "</td>";
                         echo "<td>" . htmlspecialchars(ucfirst($slot["size"])) . "</td>";
                         echo "<td>" . htmlspecialchars(ucfirst($slot["status"])) . "</td>";
@@ -176,7 +214,7 @@ if ($slotResult) {
                         echo "<td>" . htmlspecialchars($slot["creation_date"]) . "</td>";
                         echo "<td>" . htmlspecialchars($slot["last_updated"]) . "</td>";
                         echo "<td>";
-                        echo "<button class='btn update-btn' data-id='" . $slot["id"] . "' data-size='" . htmlspecialchars($slot["size"]) . "' data-status='" . htmlspecialchars($slot["status"]) . "' data-price='" . htmlspecialchars($slot["price_per_hour"]) . "' data-amenities='" . htmlspecialchars($slot["amenities"]) . "'>Update</button>";
+                        echo "<button class='btn update-btn' data-id='" . $slot["id"] . "'data-slot_number='" . $slot["slot_number"] . "' data-size='" . htmlspecialchars($slot["size"]) . "' data-status='" . htmlspecialchars($slot["status"]) . "' data-price='" . htmlspecialchars($slot["price_per_hour"]) . "' data-amenities='" . htmlspecialchars($slot["amenities"]) . "'>Update</button>";
                         if ($slot["status"] !== "occupied" && $slot["status"] !== "reserved") {
                             echo "<button class='btn delete-btn' data-id='" . $slot["id"] . "'>Delete</button>";
                         }
@@ -214,6 +252,7 @@ if ($slotResult) {
     document.querySelectorAll('.update-btn').forEach(button => {
         button.addEventListener('click', function () {
             var id = this.getAttribute('data-id');
+            var slot_number = this.getAttribute('data-slot_number')
             var size = this.getAttribute('data-size');
             var status = this.getAttribute('data-status');
             var price = this.getAttribute('data-price');
@@ -228,9 +267,18 @@ if ($slotResult) {
             updateForm.id = 'updateSlotForm';
             updateForm.style.display = 'block';
             updateForm.innerHTML = `
+                <?php if ($errorMessage): ?>
+                    <div class="error-message">
+                        <?php echo htmlspecialchars($errorMessage); ?>
+                    </div>
+                <?php endif; ?>
                 <form action="slot-management.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="update_slot" value="1">
                     <input type="hidden" name="id" value="${id}">
+
+                    <label for="slot_number">Slot Number:</label>
+                    <input type="text" id="slot_number" name="slot_number" value="${slot_number}" maxlength="8" required>
+
                     <label for="size">Size:</label>
                     <select id="size" name="size" required>
                         <option value="compact" ${size === 'compact' ? 'selected' : ''}>Compact</option>

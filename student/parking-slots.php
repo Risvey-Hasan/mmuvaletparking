@@ -60,6 +60,7 @@ if ($slotResult) {
                     echo "<div class='card'>";
                     echo "<img src='../images/" . htmlspecialchars($slot["image"]) . "' alt='" . htmlspecialchars($slot["image"]) . "' class='slot-image'>";
                     echo "<div class='container'>";
+                    echo "<h4><b>Slot Number: " . htmlspecialchars($slot["slot_number"]) . "</b></h4>";
                     echo "<h4><b>Faculty: " . htmlspecialchars($slot["faculty"]) . "</b></h4>";
                     echo "<p>Size: " . htmlspecialchars($slot["size"]) . "</p>";
                     echo "<p>Status: " . htmlspecialchars($slot["status"]) . "</p>";
