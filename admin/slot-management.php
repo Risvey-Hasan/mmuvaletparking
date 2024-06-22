@@ -1,9 +1,9 @@
 <?php
 $pageTitle = "Manage Parking Slots";
-require_once("function/authentication.php");
-require_once("include/header.php");
-require_once("include/sidebar.php");
-require_once("include/connection.php");
+require_once ("function/authentication.php");
+require_once ("include/header.php");
+require_once ("include/sidebar.php");
+require_once ("include/connection.php");
 
 // Handle form submission to create a new slot
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_slot'])) {
@@ -139,62 +139,65 @@ if ($slotResult) {
                     <label for="image">Image:</label>
                     <input type="file" id="image" name="image">
 
-                    <button type="submit" class="btn">Save</button>
-                    <button type="button" class="btn cancel-update">Cancel</button>
+                    <div class="button-group">
+                        <button type="submit" class="btn">Save</button>
+                        <button type="button" class="btn cancel-update">Cancel</button>
+                    </div>
                 </form>
             </div>
+
 
             <!--WRITE THE TABLE HERE-->
             <table>
                 <thead>
-                <tr>
-                    <th>SN</th>
-                    <th>Image</th>
-                    <th>Faculty</th>
-                    <th>Size</th>
-                    <th>Status</th>
-                    <th>Price per Hour</th>
-                    <th>Amenities</th>
-                    <th>Creation Date</th>
-                    <th>Last Updated</th>
-                    <th>Action</th>
-                </tr>
+                    <tr>
+                        <th>SN</th>
+                        <th>Image</th>
+                        <th>Faculty</th>
+                        <th>Size</th>
+                        <th>Status</th>
+                        <th>Price per Hour</th>
+                        <th>Amenities</th>
+                        <th>Creation Date</th>
+                        <th>Last Updated</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <?php
-                $i = 1;
-                if (!empty($slots)) {
-                    foreach ($slots as $slot) {
-                        echo "<tr>";
-                        echo "<td>" . $i . "</td>";
-                        echo "<td><img src='../images/" . htmlspecialchars($slot["image"]) . "' alt='Slot Image' style='width:70px;height:auto;'></td>";
-                        echo "<td>" . htmlspecialchars($slot["faculty"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($slot["size"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($slot["status"]) . "</td>";
-                        echo "<td>RM" . htmlspecialchars($slot["price_per_hour"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($slot["amenities"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($slot["creation_date"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($slot["last_updated"]) . "</td>";
-                        echo "<td>";
-                        echo "<button class='btn update-btn' data-id='" . $slot["id"] . "' data-size='" . htmlspecialchars($slot["size"]) . "' data-status='" . htmlspecialchars($slot["status"]) . "' data-price='" . htmlspecialchars($slot["price_per_hour"]) . "' data-amenities='" . htmlspecialchars($slot["amenities"]) . "'>Update</button>";
-                        if ($slot["status"] !== "occupied" && $slot["status"] !== "reserved") {
-                            echo "<button class='btn delete-btn' data-id='" . $slot["id"] . "'>Delete</button>";
+                    <?php
+                    $i = 1;
+                    if (!empty($slots)) {
+                        foreach ($slots as $slot) {
+                            echo "<tr>";
+                            echo "<td>" . $i . "</td>";
+                            echo "<td><img src='../images/" . htmlspecialchars($slot["image"]) . "' alt='Slot Image' style='width:70px;height:auto;'></td>";
+                            echo "<td>" . htmlspecialchars($slot["faculty"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($slot["size"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($slot["status"]) . "</td>";
+                            echo "<td>RM" . htmlspecialchars($slot["price_per_hour"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($slot["amenities"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($slot["creation_date"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($slot["last_updated"]) . "</td>";
+                            echo "<td>";
+                            echo "<button class='btn update-btn' data-id='" . $slot["id"] . "' data-size='" . htmlspecialchars($slot["size"]) . "' data-status='" . htmlspecialchars($slot["status"]) . "' data-price='" . htmlspecialchars($slot["price_per_hour"]) . "' data-amenities='" . htmlspecialchars($slot["amenities"]) . "'>Update</button>";
+                            if ($slot["status"] !== "occupied" && $slot["status"] !== "reserved") {
+                                echo "<button class='btn delete-btn' data-id='" . $slot["id"] . "'>Delete</button>";
+                            }
+                            echo "</td>";
+                            echo "</tr>";
+                            $i++;
                         }
-                        echo "</td>";
-                        echo "</tr>";
-                        $i++;
+                    } else {
+                        echo "<tr><td colspan='10'>No slots found</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='10'>No slots found</td></tr>";
-                }
-                ?>
+                    ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-<?php require_once("include/footer.php"); ?>
+<?php require_once ("include/footer.php"); ?>
 
 <!-- JavaScript for Add Slot Form -->
 <script>
