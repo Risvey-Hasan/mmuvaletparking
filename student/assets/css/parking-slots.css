@@ -1,47 +1,133 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.dash-content {
+    padding: 20px;
+}
+
+.overview .title {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.title i {
+    margin-right: 10px;
+}
+
+div.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Search Bar Styles */
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+.search-form input[type="text"],
+.search-form select {
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    flex: 1;
+}
+
+.search-form select {
+    flex: none;
+    width: auto;
+}
+
+.search-form .search-btn {
+    background-color: transparent;
+    color: #333;
+    border: 1px solid #eee;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 15px;
+    transition: color 0.3s ease;
+}
+
+.search-form .search-btn:hover {
+    color: #000;
+}
+
+.search-form .search-btn i {
+    font-size: 20px;
+    color: #333;
+}
+
+/* Card Styles */
 .cards {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 20px;
 }
 
 .card {
-    background-color: #f1f1f1;
-    width: 250px;
-    margin: 16px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    border-radius: 5px;
-    padding: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    box-sizing: border-box;
+    width: 300px;
 }
 
 .card img.slot-image {
     width: 100%;
     height: auto;
-    background-color: #f1f1f1;
 }
 
-.container {
-    padding: 16px;
-    background-color: #f1f1f1;
+.card .container {
+    padding: 15px;
 }
 
-.btn.book-btn {
-    background-color: #4CAF50;
-    color: white;
+.card h4 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+.card p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.card .btn.book-btn {
+    background-color: #28a745;
+    color: #fff;
     border: none;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin-top: 10px;
+    border-radius: 20px;
+    padding: 10px 15px;
     cursor: pointer;
-    border-radius: 5px;
-    width: 100%;
+    transition: background-color 0.3s ease;
 }
 
-.btn.book-btn:hover {
-    background-color: #45a049;
+.card .btn.book-btn:hover {
+    background-color: #218838;
+}
+
+.success-message {
+    color: #28a745;
+    margin-top: 10px;
+    font-weight: bold;
 }

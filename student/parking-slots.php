@@ -34,12 +34,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_to_cart'])) {
     }
 }
 
-// Get all the slots from the database
-$slotQuery = "SELECT * FROM `parking_slots`";
-$slotResult = mysqli_query($conn, $slotQuery);
+// Initialize search filters
+$searchQuery = isset($_GET['searchQuery']) ? $_GET['searchQuery'] : '';
+$searchSize = isset($_GET['searchSize']) ? $_GET['searchSize'] : '';
+$searchStatus = isset($_GET['searchStatus']) ? $_GET['searchStatus'] : '';
+
+// Get all the slots from the database with search filters
+$slotQuery = "SELECT * FROM `parking_slots` WHERE (faculty LIKE ? OR amenities LIKE ? OR slot_number LIKE ?) AND (size LIKE ?) AND (status LIKE ?)";
+$stmt = $conn->prepare($slotQuery);
+$searchQueryWildcard = "%" . $searchQuery . "%";
+$searchSizeWildcard = "%" . $searchSize . "%";
+$searchStatusWildcard = "%" . $searchStatus . "%";
+$stmt->bind_param("sssss", $searchQueryWildcard, $searchQueryWildcard, $searchQueryWildcard, $searchSizeWildcard, $searchStatusWildcard);
+$stmt->execute();
+$slotResult = $stmt->get_result();
 $slots = [];
 if ($slotResult) {
-    while ($row = mysqli_fetch_assoc($slotResult)) {
+    while ($row = $slotResult->fetch_assoc()) {
         $slots[] = $row;
     }
 }
@@ -51,6 +62,29 @@ if ($slotResult) {
             <i class="uil uil-tachometer-fast-alt"></i>
             <span class="text">View Slots</span>
         </div>
+
+        <!-- Search Form -->
+        <div class="search">
+            <form method="GET" action="parking-slots.php" class="search-form">
+                <input type="text" name="searchQuery" placeholder="Faculty, Amenities, or Slot Number"
+                       value="<?php echo htmlspecialchars($searchQuery); ?>">
+                <select name="searchSize">
+                    <option value="">Select Size</option>
+                    <option value="small" <?php if ($searchSize == 'small') echo 'selected'; ?>>Small</option>
+                    <option value="medium" <?php if ($searchSize == 'medium') echo 'selected'; ?>>Medium</option>
+                    <option value="large" <?php if ($searchSize == 'large') echo 'selected'; ?>>Large</option>
+                </select>
+                <select name="searchStatus">
+                    <option value="">Select Status</option>
+                    <option value="available" <?php if ($searchStatus == 'available') echo 'selected'; ?>>Available
+                    </option>
+                    <option value="occupied" <?php if ($searchStatus == 'occupied') echo 'selected'; ?>>Occupied
+                    </option>
+                </select>
+                <button type="submit" class="btn search-btn"><i class="uil uil-search"></i></button>
+            </form>
+        </div>
+
 
         <!-- Display slots as cards -->
         <div class="cards">
