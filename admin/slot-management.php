@@ -169,10 +169,10 @@ if ($slotResult) {
                         echo "<td>" . $i . "</td>";
                         echo "<td><img src='../images/" . htmlspecialchars($slot["image"]) . "' alt='Slot Image' style='width:70px;height:auto;'></td>";
                         echo "<td>" . htmlspecialchars($slot["faculty"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($slot["size"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($slot["status"]) . "</td>";
+                        echo "<td>" . htmlspecialchars(ucfirst($slot["size"])) . "</td>";
+                        echo "<td>" . htmlspecialchars(ucfirst($slot["status"])) . "</td>";
                         echo "<td>RM" . htmlspecialchars($slot["price_per_hour"]) . "</td>";
-                        echo "<td>" . htmlspecialchars($slot["amenities"]) . "</td>";
+                        echo "<td>" . htmlspecialchars(ucfirst($slot["amenities"])) . "</td>";
                         echo "<td>" . htmlspecialchars($slot["creation_date"]) . "</td>";
                         echo "<td>" . htmlspecialchars($slot["last_updated"]) . "</td>";
                         echo "<td>";
