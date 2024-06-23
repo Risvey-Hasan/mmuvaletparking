@@ -6,7 +6,7 @@
     <title>Student Registration</title>
     <link rel="stylesheet" href="assets/css/register.css" type="text/css"/>
 </head>
-<body>
+<body style="background: url('../images/backgrounds/Campus.webp') no-repeat center center fixed; background-size: cover;">
     <div class="container">
         <h2>Student Registration</h2>
         <form id="registrationForm" method="post" action="helpers/register.php" onsubmit="return validateRegiterform()">

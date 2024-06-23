@@ -13,7 +13,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background: url('images/Campus.webp') no-repeat center center fixed;
+            background: url('images/backgrounds/Campus.webp') no-repeat center center fixed;
             background-size: cover;
         }
         .container {
@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="images/mmulogo.jpg" alt="Logo" class="logo">
+        <img src="images/backgrounds/mmulogo.jpg" alt="Logo" class="logo">
         <h1>MMU Valet Parking System</h1>
         <button class="login-btn" onclick="location.href='student/login.php'">Login</button>
     </div>

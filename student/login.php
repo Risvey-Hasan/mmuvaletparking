@@ -6,7 +6,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="assets/css/design.css" type="text/css">
 </head>
-<body>
+<body style="background: url('../images/backgrounds/Campus.webp') no-repeat center center fixed; background-size: cover;">
     <div class="container">
         <h2>Login</h2>
         <form id="loginForm" method="post" action="helpers/login.php" onsubmit="return validateLoginform()">
