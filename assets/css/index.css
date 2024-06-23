@@ -47,3 +47,35 @@ h1 {
 .login-btn:active {
     transform: translateY(1px);
 }
+
+footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #FFFFFF;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-container p {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-link {
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}

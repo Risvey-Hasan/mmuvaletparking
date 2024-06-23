@@ -95,8 +95,12 @@ div.search{
 
 .card img.slot-image {
     width: 100%;
+    max-width: 400px; /* Set your desired maximum width */
     height: auto;
+    max-height: 300px; /* Set your desired maximum height */
+    object-fit: contain; /* Ensures the aspect ratio is maintained */
 }
+
 
 .card .container {
     padding: 15px;

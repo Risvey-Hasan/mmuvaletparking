@@ -34,7 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: #f4f4f9;
             margin: 0;
             padding: 0;
+            background: url('images/backgrounds/Campus.webp') no-repeat center center fixed;
+            background-size: cover;
         }
+
         .container {
             width: 50%;
             margin: 50px auto;
@@ -43,14 +46,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
+
         h1 {
             text-align: center;
             color: #333;
         }
+
         form {
             display: flex;
             flex-direction: column;
         }
+
         textarea {
             padding: 10px;
             margin: 10px 0;
@@ -59,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-size: 16px;
             resize: vertical;
         }
+
         button {
             padding: 10px;
             margin: 10px 0;
@@ -69,19 +76,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-size: 16px;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #218838;
         }
+
         .feedback-status {
             text-align: center;
             margin-top: 20px;
             color: #28a745;
             font-weight: bold;
         }
+
+        .home-button {
+            background-color: transparent;
+            color: #38506e;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-align: center;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .home-button:hover {
+            background-color: #EEEEEE;
+        }
     </style>
 </head>
 <body>
 <div class="container">
+    <a href="index.php" class="home-button">Back to Home</a>
     <h1>Feedback Form</h1>
     <form method="POST" action="">
         <textarea name="message" rows="5" placeholder="Enter your feedback here..." required></textarea>
@@ -92,4 +117,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php endif; ?>
 </div>
 </body>
+<footer>
+    <div class="footer-container">
+        <p>&copy; <?php echo date("Y"); ?> MMU Valet Parking. All rights reserved.</p>
+        <a href="feedback.php" class="footer-link">Feedback</a>
+    </div>
+    <style>
+        footer {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #333;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-container p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-link {
+            color: #007bff;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</footer>
 </html>

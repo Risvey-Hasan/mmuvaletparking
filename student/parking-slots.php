@@ -55,7 +55,7 @@ if ($slotResult) {
     }
 }
 ?>
-
+<div class="main-content">
 <div class="dash-content">
     <div class="overview">
         <div class="title">
@@ -123,6 +123,7 @@ if ($slotResult) {
             ?>
         </div>
     </div>
+</div>
 </div>
 
 <?php require_once("include/footer.php"); ?>
