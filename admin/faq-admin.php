@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Assist Artists"; 
+$pageTitle = "FAQ";
 require_once("function/authentication.php");
 require_once("include/header.php"); 
 require_once("include/sidebar.php");

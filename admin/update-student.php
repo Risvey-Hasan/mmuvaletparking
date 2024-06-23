@@ -60,12 +60,12 @@ $result = $conn->query($sql);
                         echo "<td>" . htmlspecialchars($row["email"]) . "</td>";
                         echo "<td>" . htmlspecialchars($row["phone"]) . "</td>";
                         echo "<td>" . htmlspecialchars($row["address"]) . "</td>";
-                        echo "<td><a href='update-info.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure you want to update this artist info?\")'>Update Info</a></td>";
+                        echo "<td><a href='update-info.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure you want to update this student info?\")'>Update Info</a></td>";
                         echo "</tr>";
                         $i++;
                     }
                 } else {
-                    echo "<tr><td colspan='6'>No artists found</td></tr>";
+                    echo "<tr><td colspan='6'>No student found</td></tr>";
                 }
                 ?>
                 </tbody>

@@ -11,7 +11,7 @@
         <ul class="nav-links">
             <li><a href="index.php">
                     <i class="uil uil-estate"></i>
-                    <span class="link-name">Dahsboard</span>
+                    <span class="link-name">Dashboard</span>
                 </a></li>
             <li><a href="profile.php">
                     <i class="uil uil-files-landscapes"></i>

@@ -138,11 +138,6 @@ if ($slotResult) {
 
             <!-- Add Slot Form (hidden by default) -->
             <div id="addSlotForm" style="display: none;">
-                <?php if ($errorMessage): ?>
-                    <div class="error-message">
-                        <?php echo htmlspecialchars($errorMessage); ?>
-                    </div>
-                <?php endif; ?>
                 <form action="slot-management.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="create_slot" value="1">
                     <label for="faculty">Faculty:</label>
@@ -179,6 +174,12 @@ if ($slotResult) {
                     <button type="button" class="btn cancel-update">Cancel</button>
                 </form>
             </div>
+
+            <?php if ($errorMessage): ?>
+                <div class="error-message">
+                    <?php echo htmlspecialchars($errorMessage); ?>
+                </div>
+            <?php endif; ?>
 
             <!--WRITE THE TABLE HERE-->
             <table>

@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
 
     if ($stmt->execute()) {
         $_SESSION["msg"] = '<div class="alert alert-success">
-            <strong>Artist deleted successfully</strong>
+            <strong>Student deleted successfully</strong>
         </div>';
         header("location:../remove-student.php");
     } else {
