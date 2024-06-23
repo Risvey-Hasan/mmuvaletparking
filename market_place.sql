@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2024 at 01:43 PM
+-- Generation Time: Jun 23, 2024 at 04:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -28,22 +28,66 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `announcements` (
-  `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `image` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `announcements`
 --
 
-INSERT INTO `announcements` (`id`, `title`, `content`, `image`, `created_at`) VALUES
-(3, 'Hello', 'Hey', 'Screenshot 2023-11-08 163035.png', '2024-06-12 05:30:04'),
-(4, 'Hej', 'Swedish', 'Screenshot 2023-11-08 201728.png', '2024-06-12 05:57:21'),
-(6, 'Test 33', '23123131', 'Screenshot 2023-12-05 213526.png', '2024-06-21 08:04:47'),
-(12, 'Test 123', 'adsadadadasdasda', 'Screenshot 2023-12-05 213526.png', '2024-06-21 11:42:55');
+INSERT INTO `announcements` (`title`, `content`, `image`, `created_at`, `id`) VALUES
+('FCI Parking Slots', 'Attention to all FCI students and lecturers, please do not park alongside the main road as it is dangerous to other people especially pedestrians.\r\n', 'WhatsApp Image 2024-06-23 at 21.51.11_e1d58a00.jpg', '2024-06-23 13:55:37', 1),
+('MMU Family Day (MMU Stadium)', 'We have to inform to all visitors that the usual parking slots in front of the stadium are now closed due to safety reasons. Please park to the nearby available parking slots.\r\n', 'WhatsApp Image 2024-06-23 at 21.51.11_a55fe9b6.jpg', '2024-06-23 13:56:27', 2),
+('20th Graduation Day MMU', 'Today mark the historical day for some of the students that are graduating. We have to inform to all visitors that some of the reserved parking slots are now open to every visitors.', 'WhatsApp Image 2024-06-23 at 21.51.12_e0a96cd4.jpg', '2024-06-23 13:56:49', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `id` int(11) NOT NULL,
+  `user_id` varchar(100) NOT NULL,
+  `parking_slot_id` int(11) NOT NULL,
+  `card_number` varchar(16) NOT NULL,
+  `expiry_date` varchar(5) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `period` int(11) NOT NULL,
+  `valid` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`id`, `user_id`, `parking_slot_id`, `card_number`, `expiry_date`, `amount`, `period`, `valid`, `created_at`) VALUES
+(10, 'risvey@gmail.com', 20, '3982475324573457', '44/44', 10.00, 1, 1, '2024-06-23 14:09:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `user_id` varchar(100) NOT NULL,
+  `slot_id` int(11) NOT NULL,
+  `added_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `slot_id`, `added_date`) VALUES
+(24, 'risvey@gmail.com', 19, '2024-06-23 14:07:06');
 
 -- --------------------------------------------------------
 
@@ -55,9 +99,35 @@ CREATE TABLE `faq` (
   `id` int(11) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
-  `reply` text DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `reply` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `faq`
+--
+
+INSERT INTO `faq` (`id`, `subject`, `message`, `user_id`, `reply`, `created_at`) VALUES
+(11, 'Appriciation', 'This is the greatest website I have ever seen.', 21, 'Thank you for your interest.', '2024-06-23 14:10:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `id` int(11) NOT NULL,
+  `message` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `message`) VALUES
+(4, 'The background image might be better than this.');
 
 -- --------------------------------------------------------
 
@@ -67,13 +137,10 @@ CREATE TABLE `faq` (
 
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
-  `subject` varchar(255) NOT NULL,
-  `message` text NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `reply` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `sender` varchar(255) NOT NULL,
   `receiver` varchar(255) NOT NULL,
+  `content` text DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -81,73 +148,37 @@ CREATE TABLE `messages` (
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`id`, `subject`, `message`, `user_id`, `reply`, `created_at`, `sender`, `receiver`, `timestamp`) VALUES
-(1, 'Product', 'Error in product services', 1, NULL, '2024-05-14 09:38:28', '', '', '2024-06-21 07:01:21'),
-(2, 'Linking of', 'tttt', 1, 'We are working on it', '2024-05-14 10:14:16', '', '', '2024-06-21 07:01:21'),
-(3, 'Paymment', 'Im having issues with the my customers payment.', 5, NULL, '2024-05-16 08:14:07', '', '', '2024-06-21 07:01:21');
+INSERT INTO `messages` (`id`, `sender`, `receiver`, `content`, `type`, `timestamp`) VALUES
+(61, 'risvey@gmail.com', 'admin@gmail.com', 'Hello admin', 'text', '2024-06-23 14:10:04');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Table structure for table `parking_slots`
 --
 
-CREATE TABLE `orders` (
+CREATE TABLE `parking_slots` (
   `id` int(11) NOT NULL,
-  `buyer_id` int(11) NOT NULL,
-  `artist_id` int(11) DEFAULT NULL,
-  `order_id` varchar(255) DEFAULT NULL,
-  `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `order_status` varchar(50) NOT NULL,
-  `total_amount` decimal(10,2) NOT NULL
+  `faculty` varchar(5) NOT NULL,
+  `size` enum('compact','standard','large') NOT NULL,
+  `status` enum('available','occupied','reserved','under maintenance') NOT NULL,
+  `price_per_hour` decimal(10,2) NOT NULL,
+  `amenities` varchar(255) DEFAULT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `last_updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `image` varchar(255) NOT NULL DEFAULT 'slots/default.png',
+  `slot_number` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `orders`
+-- Dumping data for table `parking_slots`
 --
 
-INSERT INTO `orders` (`id`, `buyer_id`, `artist_id`, `order_id`, `order_date`, `order_status`, `total_amount`) VALUES
-(1, 1, 1, 'ORD001', '2024-05-14 10:27:43', 'Pending', 100.00),
-(2, 2, 1, 'ORD002', '2024-05-14 10:27:43', 'In Progress', 150.00),
-(3, 3, 1, 'ORD003', '2024-05-14 10:27:43', 'Shipped', 200.00),
-(4, 4, 1, 'ORD004', '2024-05-14 10:27:43', 'Delivered', 175.50),
-(5, 5, 1, 'ORD005', '2024-05-14 10:27:43', 'Pending', 120.00),
-(6, 6, 1, 'ORD006', '2024-05-14 10:27:43', 'In Progress', 180.00),
-(7, 7, 1, 'ORD007', '2024-05-14 10:27:43', 'Shipped', 220.00),
-(8, 8, 1, 'ORD008', '2024-05-14 10:27:43', 'Delivered', 195.75),
-(9, 9, 1, 'ORD009', '2024-05-14 10:27:43', 'Pending', 130.00),
-(10, 10, 1, 'ORD010', '2024-05-14 10:27:43', 'In Progress', 170.00);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `products`
---
-
-CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
-  `artist_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `artist_id`, `name`, `description`, `price`, `created_at`) VALUES
-(1, 1, 'Malaysian Landscape Painting', 'A stunning painting depicting the lush greenery and natural beauty of Malaysia', 150.00, '2024-05-14 10:58:05'),
-(2, 1, 'Traditional Malaysian Batik Art', 'Hand-dyed fabric featuring intricate Malaysian batik patterns', 120.00, '2024-05-14 10:58:05'),
-(3, 1, 'Tropical Rainforest Sculpture', 'A wooden sculpture inspired by the rich biodiversity of Malaysia\'s rainforests', 200.00, '2024-05-14 10:58:05'),
-(4, 1, 'Malay Traditional Keris Dagger', 'Crafted replica of a Malay traditional keris dagger, symbolizing courage and honor', 80.00, '2024-05-14 10:58:05'),
-(5, 1, 'Petronas Twin Towers Artwork', 'Artistic representation of the iconic Petronas Twin Towers, a symbol of Malaysia\'s modernity', 180.00, '2024-05-14 10:58:05'),
-(6, 1, 'Borneo Tribal Mask', 'Intricately carved wooden mask inspired by the indigenous tribes of Borneo', 90.00, '2024-05-14 10:58:05'),
-(7, 1, 'Malaysian Sunset Painting', 'Vibrant painting capturing the breathtaking beauty of a Malaysian sunset', 250.00, '2024-05-14 10:58:05'),
-(8, 1, 'Malaysian Handwoven Tapestry', 'Exquisite tapestry handwoven with traditional Malaysian motifs and colors', 100.00, '2024-05-14 10:58:05'),
-(9, 1, 'Malaysia\'s Majestic Mountains Artwork', 'Artwork showcasing the majestic mountains of Malaysia, a sight to behold', 170.00, '2024-05-14 10:58:05'),
-(10, 1, 'Malay Songket Fabric', 'Luxurious handwoven fabric adorned with intricate Malay songket motifs, a cultural treasure', 150.00, '2024-05-14 10:58:05');
+INSERT INTO `parking_slots` (`id`, `faculty`, `size`, `status`, `price_per_hour`, `amenities`, `creation_date`, `last_updated`, `image`, `slot_number`) VALUES
+(18, 'FCI', 'standard', 'available', 5.00, 'Nothing', '2024-06-23 13:57:20', '2024-06-23 13:57:20', 'slots/default.png', 'FC-08-07'),
+(19, 'FCI', 'compact', 'under maintenance', 2.00, 'Bike Stand', '2024-06-23 13:57:55', '2024-06-23 13:57:55', 'slots/default.png', 'FC-08-09'),
+(20, 'FOE', 'large', 'reserved', 10.00, 'Electric charging', '2024-06-23 13:58:29', '2024-06-23 14:09:13', 'slots/default.png', 'FE-09-07'),
+(21, 'FOM', 'compact', 'available', 2.00, 'Bike Stand', '2024-06-23 13:58:55', '2024-06-23 13:58:55', 'slots/default.png', 'FM-04-09');
 
 -- --------------------------------------------------------
 
@@ -158,7 +189,7 @@ INSERT INTO `products` (`id`, `artist_id`, `name`, `description`, `price`, `crea
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `phone` varchar(20) NOT NULL,
   `address` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -170,18 +201,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `password`, `privilege`) VALUES
-(1, 'Ibrahim Mohammed', 'student@gmail.com', '08108101246', 'No.  5 Badawa', '$2y$10$Ior1sDuJRgBi3nA5zjx0E.XAf4DUEHkkzz69/M1MH0eALH/F0zQXW', 1),
 (2, 'Admin', 'admin@gmail.com', '0905678999', 'Layin Alhaji Hamisu', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 2),
-(3, 'Artist One', 'artist1@example.com', '1234567890', 'Address 1', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
-(4, 'Artist Two', 'artist2@example.com', '1234567891', 'Address 2', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
-(5, 'Artist Three', 'artist7@example.com', '1234567892', 'Address 3', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
-(6, 'Artist Four', 'artist4@example.com', '1234567893', 'Address 4', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
-(7, 'Artist Five', 'artist5@example.com', '1234567894', 'Address 5', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
-(8, 'Artist Six', 'artist6@example.com', '1234567895', 'Address 6', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
-(9, 'Artist Seven', 'artist7@example.com', '1234567896', 'Address 7', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
-(10, 'Artist Eight', 'artist8@example.com', '1234567897', 'Address 8', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
-(11, 'Artist Nine', 'artist9@gmail.com', '1234567898', 'No. 7 Kuala Lumpur, Malaysia', '$2y$10$KNOF/kCl471Un59GoWKnNeVt9w9OsXDaBP6PcidlKq.DnAVUPiMbe', 1),
-(13, 'daniel', 'daniel@gmail.com', '013333343', 'Cyberjaya', '$2y$10$lrRILOHPV1T9EOGsIQ16jewniEMVX/zScBR.n964oYy2QjcXB0aiG', 1);
+(21, 'Risvey Hasan', 'risvey@gmail.com', '+60172836193', 'The arc block C-D', '$2y$10$ZT540hLEvfw6xbTYPusvHeG4VVXuEp7FiXRfd83PN/ojwh3lviuue', 1);
 
 --
 -- Indexes for dumped tables
@@ -194,34 +215,54 @@ ALTER TABLE `announcements`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `parking_slot_id` (`parking_slot_id`),
+  ADD KEY `bookings_ibfk_1` (`user_id`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `slot_id` (`slot_id`);
+
+--
 -- Indexes for table `faq`
 --
 ALTER TABLE `faq`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `messages`
 --
 ALTER TABLE `messages`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_sender` (`sender`),
+  ADD KEY `fk_receiver` (`receiver`);
 
 --
--- Indexes for table `orders`
+-- Indexes for table `parking_slots`
 --
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `parking_slots`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slot_number` (`slot_number`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -231,37 +272,74 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT for table `parking_slots`
 --
-ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `parking_slots`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`email`) ON DELETE CASCADE,
+  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`parking_slot_id`) REFERENCES `parking_slots` (`id`);
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`email`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`slot_id`) REFERENCES `parking_slots` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `fk_receiver` FOREIGN KEY (`receiver`) REFERENCES `users` (`email`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_sender` FOREIGN KEY (`sender`) REFERENCES `users` (`email`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
