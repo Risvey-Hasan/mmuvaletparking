@@ -37,11 +37,11 @@
                     <span class="link-name">Manage Slots</span>
                 </a></li>
             <li><a href="contact-user.php">
-                    <i class="uil uil-newspaper"></i>
+                    <i class="uil uil-message"></i>
                     <span class="link-name">Contact User</span>
                 </a></li>
             <li><a href="feedback.php">
-                    <i class="uil uil-newspaper"></i>
+                    <i class="uil uil-feedback"></i>
                     <span class="link-name">Feedbacks</span>
                 </a></li>
         </ul>
