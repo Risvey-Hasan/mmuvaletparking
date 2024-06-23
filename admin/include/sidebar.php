@@ -19,10 +19,6 @@
                     <span class="link-name">Remove Student</span>
                 </a></li>
 
-                <li><a href="faq-admin.php">
-                     <i class="uil uil-comments"></i>
-                    <span class="link-name">FAQ</span>
-                </a></li>
                 <li><a href="update-student.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Update Student Info</span>
@@ -31,13 +27,22 @@
                     <i class="uil uil-newspaper"></i>
                     <span class="link-name">Update News & Announcement</span>
                 </a></li>
+
+                <li><a href="slot-management.php">
+                        <i class="uil uil-newspaper"></i>
+                        <span class="link-name">Manage Slots</span>
+                    </a></li>
                 <li><a href="contact-user.php">
                         <i class="uil uil-newspaper"></i>
                         <span class="link-name">Contact User</span>
                     </a></li>
-                <li><a href="slot-management.php">
-                        <i class="uil uil-newspaper"></i>
-                        <span class="link-name">Manage Slots</span>
+                <li><a href="faq-admin.php">
+                        <i class="uil uil-comments"></i>
+                        <span class="link-name">FAQ</span>
+                    </a></li>
+                <li><a href="feedback.php">
+                        <i class="uil uil-comments"></i>
+                        <span class="link-name">Feedbacks</span>
                     </a></li>
             </ul>
             <ul class="logout-mode">

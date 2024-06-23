@@ -1,0 +1,28 @@
+.feedback-container {
+    width: 60%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.feedback-container h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.feedback-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.feedback-item {
+    background-color: #f4f4f9;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333;
+}

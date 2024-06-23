@@ -18,6 +18,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <link rel="stylesheet" href="assets/css/searchstyle.css">
     <link rel="stylesheet" href="assets/css/chatroom.css">
     <link rel="stylesheet" href="assets/css/manage-slots.css">
+    <link rel="stylesheet" href="assets/css/feedback.css">
 
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
