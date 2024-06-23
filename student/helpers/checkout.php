@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->begin_transaction();
 
     try {
-        // Prepare statement for retrieving slot_ids
+        // Prepare statement for retrieving slot_ids from cart
         $selectStmt = $conn->prepare("SELECT id, slot_id FROM cart WHERE user_id = ?");
         $selectStmt->bind_param("s", $user_email);
         $selectStmt->execute();
@@ -41,6 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Prepare statement for inserting into bookings
         $insertStmt = $conn->prepare("INSERT INTO bookings (user_id, parking_slot_id, card_number, expiry_date, amount, period, valid) VALUES (?, ?, ?, ?, ?, ?, true)");
 
+        // Prepare statement for updating the status of parking slots to reserved
+        $updateSlotStmt = $conn->prepare("UPDATE parking_slots SET status = 'reserved' WHERE id = ?");
+
         foreach ($selectedData as $item) {
             $itemId = $item['id'];
             $period = $item['period'];
@@ -52,12 +55,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Insert the retrieved slot_id into the bookings table
                 $insertStmt->bind_param("sissdi", $user_email, $slot_id, $cardNumber, $expiryDate, $amount, $period);
                 $insertStmt->execute();
+
+                // Update the status of the parking slot to reserved
+                $updateSlotStmt->bind_param("i", $slot_id);
+                $updateSlotStmt->execute();
             } else {
                 throw new Exception("Failed to retrieve slot_id for item ID: $itemId");
             }
         }
 
         $insertStmt->close();
+        $updateSlotStmt->close();
 
         // Function to delete paid items from the cart table
         function deletePaidItemsFromCart($conn, $user_email, $selectedData) {
@@ -78,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Commit transaction
         $conn->commit();
 
-        // Redirect or show success message
+        // Show success message
         echo "Payment successful!";
     } catch (Exception $e) {
         // Rollback transaction in case of error

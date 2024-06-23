@@ -55,7 +55,7 @@ try {
     <div class="overview">
         <div class="title">
             <i class="uil uil-shopping-cart"></i>
-            <span class="text">Your Bookings</span>
+            <span class="text">My Bookings</span>
         </div>
         <div class="table-design">
         <?php if (!empty($bookings)) : ?>
