@@ -4,7 +4,6 @@ var modal = document.getElementById('paymentModal');
 // Get the button that opens the modal
 var checkoutButton = document.getElementById('checkoutButton');
 
-// Debugging statements
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName('close')[0];
@@ -76,7 +75,6 @@ document.getElementById('paymentForm').addEventListener('submit', function(event
     formData.append('cvv', cvv);
     formData.append('amount', document.getElementById('total-amount').textContent);
     formData.append('selectedData', JSON.stringify(selectedData));
-    console.log(selectedData);
 
     // Submit the form data to checkout.php
     fetch('helpers/checkout.php', {
@@ -85,8 +83,7 @@ document.getElementById('paymentForm').addEventListener('submit', function(event
     })
         .then(response => response.text())
         .then(data => {
-            alert("Payment successful!");
-            // window.location.href = 'cart.php'; // Redirect to cart.php
+            window.location.href = 'cart.php'; // Redirect to cart.php
         })
         .catch(error => {
             console.error('Error:', error);
