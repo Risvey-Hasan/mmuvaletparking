@@ -70,8 +70,8 @@ if ($slotResult) {
                        value="<?php echo htmlspecialchars($searchQuery); ?>">
                 <select name="searchSize">
                     <option value="">Select Size</option>
-                    <option value="small" <?php if ($searchSize == 'small') echo 'selected'; ?>>Small</option>
-                    <option value="medium" <?php if ($searchSize == 'medium') echo 'selected'; ?>>Medium</option>
+                    <option value="compact" <?php if ($searchSize == 'compact') echo 'selected'; ?>>Compact</option>
+                    <option value="standard" <?php if ($searchSize == 'standard') echo 'selected'; ?>>Standard</option>
                     <option value="large" <?php if ($searchSize == 'large') echo 'selected'; ?>>Large</option>
                 </select>
                 <select name="searchStatus">
@@ -79,6 +79,9 @@ if ($slotResult) {
                     <option value="available" <?php if ($searchStatus == 'available') echo 'selected'; ?>>Available
                     </option>
                     <option value="occupied" <?php if ($searchStatus == 'occupied') echo 'selected'; ?>>Occupied
+                    </option>
+                    </option>
+                    <option value="reserved" <?php if ($searchStatus == 'reserved') echo 'selected'; ?>>Reserved
                     </option>
                 </select>
                 <button type="submit" class="btn search-btn"><i class="uil uil-search"></i></button>
