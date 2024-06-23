@@ -1,8 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['User'])) {
-    header("location:./login.php");
-    exit;
+if(!($_SESSION['Admin'])){
+    header("location:../student/login.php");
 }
 
 require_once("include/connection.php");
@@ -15,10 +14,8 @@ try {
     $query = $conn->prepare("
         SELECT id, created_at, period, valid 
         FROM bookings
-        WHERE user_id = ? AND valid = 1
+        WHERE valid = 1
     ");
-    $user_email = $_SESSION['username'];
-    $query->bind_param("s", $user_email);
     $query->execute();
     $result = $query->get_result();
 
