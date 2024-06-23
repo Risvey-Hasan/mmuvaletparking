@@ -31,13 +31,18 @@
                     <i class="uil uil-newspaper"></i>
                     <span class="link-name">Update News & Announcement</span>
                 </a></li>
+
+            <li><a href="slot-management.php">
+                    <i class="uil uil-newspaper"></i>
+                    <span class="link-name">Manage Slots</span>
+                </a></li>
             <li><a href="contact-user.php">
                     <i class="uil uil-newspaper"></i>
                     <span class="link-name">Contact User</span>
                 </a></li>
-            <li><a href="slot-management.php">
+            <li><a href="feedback.php">
                     <i class="uil uil-newspaper"></i>
-                    <span class="link-name">Manage Slots</span>
+                    <span class="link-name">Feedbacks</span>
                 </a></li>
         </ul>
         <ul class="logout-mode">
