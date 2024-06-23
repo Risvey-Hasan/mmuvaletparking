@@ -1,6 +1,12 @@
 /* Reset and Global Styles */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Poppins', sans-serif; }
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+}
 
 /* Variables */
 :root {
@@ -13,6 +19,8 @@ body { font-family: 'Poppins', sans-serif; }
     --box1-color: #4DA3FF;
     --box2-color: #FFE6AC;
     --box3-color: #E7D1FC;
+    --box4-color: #FFD1DC;
+    --box5-color: #D4F1F4;
     --title-icon-color: #fff;
 }
 
@@ -39,16 +47,77 @@ nav.close li a .link-name { opacity: 0; pointer-events: none; }
 .switch:before { content: ""; position: absolute; left: 5px; top: 50%; transform: translateY(-50%); height: 15px; width: 15px; background-color: var(--panel-color); border-radius: 50%; transition: all 0.3s ease; }
 
 /* Dashboard Styles */
-.dashboard { position: relative; left: 250px; background-color: var(--panel-color); min-height: 100vh; width: calc(100% - 250px); padding: 10px 14px; transition: all 0.5s ease; }
-nav.close ~ .dashboard { left: 73px; width: calc(100% - 73px); }
-.dashboard .top { position: fixed; top: 0; left: 250px; display: flex; width: calc(100% - 250px); justify-content: space-between; align-items: center; padding: 10px 14px; background-color: var(--panel-color); transition: all 0.5s ease; z-index: 10; }
-nav.close ~ .dashboard .top { left: 73px; width: calc(100% - 73px); }
-.dashboard .top .sidebar-toggle { font-size: 26px; color: var(--text-color); cursor: pointer; }
-.dashboard .top .search-box { position: relative; height: 45px; max-width: 600px; width: 100%; margin: 0 30px; }
-.top .search-box input { position: absolute; border: 1px solid var(--border-color); background-color: var(--panel-color); padding: 0 25px 0 50px; border-radius: 5px; height: 100%; width: 100%; color: var(--text-color); font-size: 15px; font-weight: 400; outline: none; }
-.top .search-box i { position: absolute; left: 15px; font-size: 22px; z-index: 10; top: 50%; transform: translateY(-50%); color: var(--black-light-color); }
-.top img { width: 40px; border-radius: 50%; }
-.dashboard .dash-content { padding-top: 50px; }
+.dashboard {
+    position: relative;
+    left: 250px;
+    background-color: var(--panel-color);
+    min-height: 100vh;
+    width: calc(100% - 250px);
+    padding: 10px 14px;
+    transition: all 0.5s ease;
+}
+nav.close ~ .dashboard {
+    left: 73px;
+    width: calc(100% - 73px);
+}
+.dashboard .top {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    display: flex;
+    width: calc(100% - 250px);
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background-color: var(--panel-color);
+    transition: all 0.5s ease;
+    z-index: 10;
+}
+nav.close ~ .dashboard .top {
+    left: 73px;
+    width: calc(100% - 73px);
+}
+.dashboard .top .sidebar-toggle {
+    font-size: 26px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+.dashboard .top .search-box {
+    position: relative;
+    height: 45px;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 30px;
+}
+.top .search-box input {
+    position: absolute;
+    border: 1px solid var(--border-color);
+    background-color: var(--panel-color);
+    padding: 0 25px 0 50px;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 400;
+    outline: none;
+}
+.top .search-box i {
+    position: absolute;
+    left: 15px;
+    font-size: 22px;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--black-light-color);
+}
+.top img {
+    width: 40px;
+    border-radius: 50%;
+}
+.dashboard .dash-content {
+    padding-top: 50px;
+}
 .dash-content .title {
     display: flex;
     align-items: center;
@@ -60,13 +129,77 @@ nav.close ~ .dashboard .top { left: 73px; width: calc(100% - 73px); }
     padding-bottom: 10px;
     box-shadow: 0 8px 5px -5px #EEE;
 }
-.dash-content .title i { position: relative; height: 35px; width: 35px; background-color: var(--primary-color); border-radius: 6px; color: var(--title-icon-color); display: flex; align-items: center; justify-content: center; font-size: 24px; }
-.dash-content .title .text { font-size: 24px; font-weight: 500; color: var(--text-color); margin-left: 10px; }
-.dash-content .boxes { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-.boxes .box { display: flex; flex-direction: column; align-items: center; border-radius: 12px; width: calc(100% / 3 - 15px); padding: 15px 20px; background-color: var(--box1-color); transition: all 0.5s ease; }
-.boxes .box i { font-size: 35px; color: var(--text-color); }
-.boxes .box .text { white-space: nowrap; font-size: 18px; font-weight: 500; color: var(--text-color); }
-.boxes .box .number { font-size: 40px; font-weight: 500; color: var(--text-color); }
-.boxes .box.box2 { background-color: var(--box2-color); }
-.boxes .box.box3 { background-color: var(--box3-color); }
+.dash-content .title i {
+    position: relative;
+    height: 35px;
+    width: 35px;
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    color: var(--title-icon-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+.dash-content .title .text {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-left: 10px;
+}
+.dash-content .boxes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.boxes .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    width: calc(100% / 3 - 15px);
+    padding: 15px 20px;
+    background-color: var(--box1-color);
+    margin-bottom: 15px; /* Added margin for better spacing */
+    transition: all 0.5s ease;
+}
+.boxes .box i {
+    font-size: 35px;
+    color: var(--text-color);
+}
+.boxes .box .text {
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.boxes .box .number {
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.boxes .box.box2 {
+    background-color: var(--box2-color);
+}
+.boxes .box.box3 {
+    background-color: var(--box3-color);
+}
+.boxes .box.box4 {
+    background-color: var(--box4-color);
+}
+.boxes .box.box5 {
+    background-color: var(--box5-color);
+}
 
+/* Responsive Design */
+@media (max-width: 768px) {
+    .boxes .box {
+        width: calc(100% / 2 - 10px);
+    }
+}
+@media (max-width: 480px) {
+    .boxes .box {
+        width: 100%;
+    }
+}

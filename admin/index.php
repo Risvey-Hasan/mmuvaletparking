@@ -12,29 +12,29 @@ require_once("include/connection.php");
             <span class="text">Dashboard</span>
         </div>
         <?php 
-        // Query to get total count of oders
-        $sql = "SELECT COUNT(*) AS total_orders FROM orders";
+        // Query to get count of unique student profiles having conversations with the admin
+        $sql = "SELECT COUNT(DISTINCT sender) AS unique_students FROM messages WHERE receiver = 'admin@gmail.com'";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
-        $total_orders = $row['total_orders'];
+        $unique_students = $row['unique_students'];
 
-        // Query to get total count of support
+        // Query to get total count of FAQs
         $sql = "SELECT COUNT(*) AS total_faqs FROM faq";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $total_faqs = $row['total_faqs'];
          
-        // Query to get total count of products
-        $sql = "SELECT COUNT(*) AS total_products FROM products";  
+        // Query to get total count of slots
+        $sql = "SELECT COUNT(*) AS total_slots FROM parking_slots";  
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
-        $total_products = $row['total_products'];
+        $total_slots = $row['total_slots'];
         ?>
         <div class="boxes">
             <div class="box box1">
                 <i class="uil uil-thumbs-up"></i>
-                <span class="text">Total Orders</span>
-                <span class="number"><?php echo $total_orders ?></span>
+                <span class="text">Unique Student Conversations</span>
+                <span class="number"><?php echo $unique_students ?></span>
             </div>
             <div class="box box2">
                 <i class="uil uil-comments"></i>
@@ -43,8 +43,8 @@ require_once("include/connection.php");
             </div>
             <div class="box box3">
                 <i class="uil uil-share"></i>
-                <span class="text"> Total Listing</span>
-                <span class="number"><?php echo $total_products ?></span>
+                <span class="text"> Total Number Of Slots</span>
+                <span class="number"><?php echo $total_slots ?></span>
             </div>
         </div>
     </div>
