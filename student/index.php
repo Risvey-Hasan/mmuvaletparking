@@ -44,12 +44,24 @@ require_once("include/connection.php");
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $total_contact_messages = $row['total_contact_messages'];
+
+        // Query to get total count of bookings
+        $sql = "SELECT COUNT(*) AS total_bookings FROM bookings WHERE user_id='$id'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $total_bookings = $row['total_bookings'];
+
+        // Query to get total count of available parking slots
+        $sql = "SELECT COUNT(*) AS total_available_slots FROM parking_slots WHERE status='available'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $total_available_slots = $row['total_available_slots'];
         ?>
 
         <div class="boxes">
             <div class="box box1">
                 <i class="uil uil-thumbs-up"></i>
-                <span class="text">Cart Number</span>
+                <span class="text">Cart Items</span>
                 <span class="number"><?php echo $total_cart ?></span>
             </div>
             <div class="box box2">
@@ -69,8 +81,14 @@ require_once("include/connection.php");
             </div>
             <div class="box box5">
                 <i class="uil uil-box"></i>
-                <span class="text">Available Booking</span>
-                <span class="number"><?php echo $total_products ?></span>
+                <span class="text">Available Slots</span>
+                <span class="number"><?php echo $total_available_slots ?></span>
+            </div>
+
+            <div class="box box6">
+                <i class="uil uil-box"></i>
+                <span class="text">My Booking</span>
+                <span class="number"><?php echo $total_bookings ?></span>
             </div>
         </div>
     </div>
