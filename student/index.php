@@ -40,7 +40,7 @@ require_once("include/connection.php");
         $total_contact_messages = $row['total_contact_messages'];
 
         // Query to get total count of bookings
-        $sql = "SELECT COUNT(*) AS total_bookings FROM bookings WHERE user_id='$username'";
+        $sql = "SELECT COUNT(*) AS total_bookings FROM bookings WHERE user_id='$username' AND valid=1";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $total_bookings = $row['total_bookings'];

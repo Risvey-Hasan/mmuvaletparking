@@ -5,7 +5,18 @@ if (!isset($_SESSION['User'])) {
     exit;
 }
 
-require_once("include/connection.php");
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "market_place";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 
 // Get the current time
 $current_time = new DateTime();
@@ -13,7 +24,7 @@ $current_time = new DateTime();
 try {
     // Prepare the SQL query to fetch all valid bookings for the user
     $query = $conn->prepare("
-        SELECT id, parking_slot_id, created_at, period, valid 
+        SELECT id, parking_slot_id, created_at, period, valid
         FROM bookings
         WHERE user_id = ? AND valid = 1
     ");
