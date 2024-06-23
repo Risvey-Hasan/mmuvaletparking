@@ -26,12 +26,6 @@ require_once("include/connection.php");
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         $total_support_messages = $row['total_support_messages'];
-        
-        // Query to get total count of products
-        $sql = "SELECT COUNT(*) AS total_products FROM products WHERE artist_id='$id'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
-        $total_products = $row['total_products'];
 
         // Query to get total count of parking slots
         $sql = "SELECT COUNT(*) AS total_parking_slots FROM parking_slots";
