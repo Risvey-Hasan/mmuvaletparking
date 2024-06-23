@@ -33,6 +33,10 @@
                     <i class="uil uil-shopping-cart"></i>
                     <span class="link-name">Your Cart</span>
                 </a></li>
+            <li><a href="my-bookings.php">
+                    <i class="uil uil-shopping-cart"></i>
+                    <span class="link-name">My Bookings</span>
+                </a></li>
             <li><a href="contact.php">
                     <i class="uil uil-phone"></i>
                     <span class="link-name">Contact Us</span>
