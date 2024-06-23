@@ -32,9 +32,26 @@ $stmt->close();
             <span class="text">Your Cart</span>
         </div>
 
+        <!-- Payment Modal -->
+        <div id="paymentModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Payment Form</h2>
+                <form id="paymentForm">
+                    <label for="cardNumber">Card Number:</label>
+                    <input type="text" id="cardNumber" name="cardNumber" required minlength="16" maxlength="16">
+                    <label for="expiryDate">Expiry Date (MM/YY):</label>
+                    <input type="text" id="expiryDate" name="expiryDate" required pattern="\d{2}/\d{2}">
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" name="cvv" required minlength="3" maxlength="4">
+                    <button type="submit" class="btn">Pay</button>
+                </form>
+            </div>
+        </div>
+
         <!-- Display cart items as a table -->
         <div class="table-design">
-            <form method="post" action="checkout.php">
+            <form id="cartForm">
                 <table>
                     <thead>
                     <tr>
@@ -45,6 +62,7 @@ $stmt->close();
                         <th>Status</th>
                         <th>Price per Hour</th>
                         <th>Amenities</th>
+                        <th>Period</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,19 +79,25 @@ $stmt->close();
                             echo "<td>" . htmlspecialchars($item["status"]) . "</td>";
                             echo "<td>RM" . htmlspecialchars($item["price_per_hour"]) . "</td>";
                             echo "<td>" . htmlspecialchars($item["amenities"]) . "</td>";
+                            // Add Period dropdown
+                            echo "<td><select name='period[" . $item['cart_id'] . "]' class='period-dropdown' data-price='" . $item['price_per_hour'] . "'>";
+                            for ($i = 1; $i <= 8; $i++) {
+                                echo "<option value='" . $i . "'" . ($i === 1 ? " selected" : "") . ">" . $i . "</option>";
+                            }
+                            echo "</select></td>";
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='7'>No items in your cart</td></tr>";
+                        echo "<tr><td colspan='8'>No items in your cart</td></tr>";
                     }
                     ?>
                     </tbody>
                     <?php if (!empty($cartItems)) { ?>
                         <tfoot>
                         <tr>
-                            <td colspan="5" style="border:none;"></td>
+                            <td colspan="6" style="border:none;"></td>
                             <td style="border:none">Total: RM<span id="total-amount"><?php echo number_format($totalAmount, 2); ?></span></td>
-                            <td style="border: none"><button type="submit" class="btn">Checkout</button></td>
+                            <td style="border: none"><button type="button" id="checkoutButton" class="btn">Checkout</button></td>
                         </tr>
                         </tfoot>
                     <?php } ?>
@@ -85,15 +109,4 @@ $stmt->close();
 
 <?php require_once("include/footer.php"); ?>
 
-<script>
-    document.getElementById('total-amount').textContent = "0";
-    document.querySelectorAll('.item-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            let total = 0;
-            document.querySelectorAll('.item-checkbox:checked').forEach(checked => {
-                total += parseFloat(checked.getAttribute('data-price'));
-            });
-            document.getElementById('total-amount').textContent = total.toFixed(2);
-        });
-    });
-</script>
+<script src="assets/js/cart.js"></script>
